@@ -11,3 +11,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 	
 func set_color(new_color):
 	$ColorRect.color = new_color
+	
+func die():
+	queue_free()

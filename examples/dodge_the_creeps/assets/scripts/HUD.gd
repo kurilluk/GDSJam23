@@ -7,6 +7,8 @@ signal start_game
 @export var ManaBar: TextureProgressBar
 @export var UnderlyingManaBar: TextureProgressBar
 
+@export var ColorFadeRect: ColorRect
+
 @export var bar_tween_first_dur = 0.15
 @export var bar_tween_second_dur = 0.15
 @export var bar_tween_third_dur = 0.5
@@ -14,16 +16,40 @@ signal start_game
 var health_tween: Tween
 var mana_tween: Tween
 
+func _ready():
+	hud_bars_hidden()
+	
 func show_message(text):
 	$MessageLabel.text = text
 	$MessageLabel.show()
 	$MessageTimer.start()
 
+func show_hud_bars():
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	var show_tween = create_tween()
+	show_tween.set_parallel(true)
+	for bar in bars:
+		bar.modulate = Color.TRANSPARENT
+		show_tween.tween_property(bar, "modulate", Color.WHITE, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)	
+
+func hide_hud_bars():
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	var hide_tween = create_tween()
+	hide_tween.set_parallel(true)
+	for bar in bars:
+		bar.modulate = Color.WHITE
+		hide_tween.tween_property(bar, "modulate", Color.TRANSPARENT, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+
 func set_hud_bars():
-	HealthBar.max_value = 100
-	HealthBar.value = 100
-	ManaBar.max_value = 100
-	ManaBar.value = 100
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	for bar in bars:
+		bar.max_value = 100
+		bar.value = 100
+
+func hud_bars_hidden():
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	for bar in bars:
+		bar.modulate = Color.TRANSPARENT
 
 func update_bar(old_value, new_value, type):
 	var tweener: Tween
@@ -68,6 +94,17 @@ func show_game_over():
 	await get_tree().create_timer(1).timeout
 	$StartButton.show()
 
+func scene_fade_in():
+	pass
+
+func fade_layer_switch(callback: Callable):
+	ColorFadeRect.color = Color.WHITE
+	ColorFadeRect.modulate = Color.TRANSPARENT
+	var layer_fade_tween = create_tween()
+	
+	layer_fade_tween.tween_property(ColorFadeRect, "modulate", Color.WHITE, 0.25).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	layer_fade_tween.tween_property(ColorFadeRect, "modulate", Color.TRANSPARENT, 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	layer_fade_tween.tween_callback(callback)
 
 func update_score(score):
 	$ScoreLabel.text = str(score)

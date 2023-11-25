@@ -17,12 +17,13 @@ bg_color = Color(0.858824, 0, 0.184314, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp17v"]
 bg_color = Color(0.0352941, 0.517647, 0.85098, 1)
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "UnderlyingHealthBar", "ManaBar", "UnderlyingManaBar")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "UnderlyingHealthBar", "ManaBar", "UnderlyingManaBar", "ColorFadeRect")]
 script = ExtResource("1_8bs4p")
 HealthBar = NodePath("HealthBar_simple")
 UnderlyingHealthBar = NodePath("UnderlyingHealthBar")
 ManaBar = NodePath("ManaBar_simple")
 UnderlyingManaBar = NodePath("UnderlyingManaBar")
+ColorFadeRect = NodePath("ColorFade")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 10
@@ -49,6 +50,7 @@ Creeps"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
+z_index = 1000
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -99,7 +101,7 @@ offset_left = 167.0
 offset_top = 837.0
 offset_right = 334.0
 offset_bottom = 1009.0
-value = 50.0
+value = 100.0
 fill_mode = 3
 texture_under = ExtResource("2_jl3v8")
 texture_over = ExtResource("3_4bm3m")
@@ -143,6 +145,15 @@ fill_mode = 3
 texture_progress = ExtResource("4_2hixl")
 tint_under = Color(0.207843, 0.207843, 0.207843, 1)
 tint_progress = Color(0.0509804, 0.152941, 0.317647, 0.768627)
+
+[node name="ColorFade" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 999
+offset_left = -99.0
+offset_top = -93.0
+offset_right = 2045.0
+offset_bottom = 1185.0
+mouse_filter = 2
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

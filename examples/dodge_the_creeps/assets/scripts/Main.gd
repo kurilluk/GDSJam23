@@ -3,9 +3,12 @@ extends Node
 @export var background: ColorRect
 @export var layers: Array[Layer]
 @export var mob_scene: PackedScene
+
+@export var enemy_spawn_amount = 2
 var score
 var current_layer
 var enemies: Array[Mob]
+var projectiles: Array[Fireball]
 
 func _ready() -> void:
 	pass
@@ -13,7 +16,10 @@ func _ready() -> void:
 func game_over():
 	$Timers/ScoreTimer.stop()
 	$Timers/MobTimer.stop()
+	$Timers/CastMagickTimer.stop()
+	$Timers/LayerSwitchTimer.stop()
 	$HUD.show_game_over()
+	$HUD.hide_hud_bars()
 	$Music.stop()
 	#$DeathSound.play()
 
@@ -21,11 +27,19 @@ func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
 	$Player.start($StartPosition.position)
+	$Player.projectile_append = Callable(self, "append_projectile")
+	$Player.projectile_erase = Callable(self, "erase_projectile")
 	$Timers/StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	$HUD.show_hud_bars()
 	set_new_layer(layers[0])
 
+func append_projectile(projectile):
+	projectiles.append(projectile)
+	
+func erase_projectile(projectile):
+	projectiles.erase(projectile)
 	#$Music.play()
 func set_new_layer(layer: Layer):	
 	current_layer = layer
@@ -44,31 +58,32 @@ func set_enemy_colors(color):
 		enemy.set_color(color)
 
 func _on_MobTimer_timeout():
+	for i in enemy_spawn_amount:
 	# Create a new instance of the Mob scene.
-	var mob = mob_scene.instantiate()
+		var mob = mob_scene.instantiate()
 
 	# Choose a random location on Path2D.
-	var mob_spawn_location = get_node(^"MobPath/MobSpawnLocation")
-	mob_spawn_location.progress = randi()
+		var mob_spawn_location = get_node(^"MobPath/MobSpawnLocation")
+		mob_spawn_location.progress = randi()
 
 	# Set the mob's direction perpendicular to the path direction.
-	var direction = mob_spawn_location.rotation + PI / 2
+		var direction = mob_spawn_location.rotation + PI / 2
 
 	# Set the mob's position to a random location.
-	mob.position = mob_spawn_location.position
+		mob.position = mob_spawn_location.position
 
 	# Add some randomness to the direction.
-	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction
+		direction += randf_range(-PI / 4, PI / 4)
+		mob.rotation = direction
 
 	# Choose the velocity for the mob.
-	var velocity = Vector2(randf_range(650.0, 850.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
+		var velocity = Vector2(randf_range(650.0, 850.0), 0.0)
+		mob.linear_velocity = velocity.rotated(direction)
 	
-	mob.set_color(current_layer.enemy_main_color)
-	enemies.append(mob)
+		mob.set_color(current_layer.enemy_main_color)
+		enemies.append(mob)
 	# Spawn the mob by adding it to the Main scene.
-	add_child(mob)
+		add_child(mob)
 
 func _on_ScoreTimer_timeout():
 	score += 1
@@ -77,13 +92,20 @@ func _on_ScoreTimer_timeout():
 func _on_StartTimer_timeout():
 	$Timers/MobTimer.start()
 	$Timers/ScoreTimer.start()
+	$Timers/CastMagickTimer.start()
+	$Timers/LayerSwitchTimer.start()
 	
-func _on_layer_switch_timer_timeout():
+func _on_layer_switch_timer_timeout():	
+	$HUD.fade_layer_switch(Callable(self, "set_new_layer_callback"))
+	
+func set_new_layer_callback():
 	var new_layer = get_rand_layer()
 	while new_layer == current_layer:
 		new_layer = get_rand_layer()
-	set_new_layer(new_layer)	
+	set_new_layer(new_layer)
 	
 func get_rand_layer():
 	var rand_layer = layers[randi() % layers.size()]
 	return rand_layer
+
+

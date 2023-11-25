@@ -5,12 +5,21 @@ signal hit
 @export var SPEED = 600 # How fast the player will move (pixels/sec).
 @export var PLAYER_MAX_HEALTH = 100
 @export var PLAYER_MAX_MANA = 100
+@export var MAGICKS_MANA_COST = 10
 @export var Game_HUD: HUD
+
+@export var Fireball: PackedScene
+
+var magick_dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+
 var health
 var mana
-var player_dead
+var player_dead = true
 var screen_size # Size of the game window.
 
+var velocity
+var projectile_append: Callable
+var projectile_erase: Callable
 signal on_death
 
 var player_inputs = {
@@ -31,7 +40,7 @@ var potion_effects = {
 	0: Callable(self, "potion_heal").bind(10),
 	1: Callable(self, "potion_hurt").bind(10),
 	2: Callable(self, "potion_gain_mana").bind(10),
-	3: Callable(self, "potion_lose_mana").bind(10),
+	3: Callable(self, "potion_loose_mana").bind(10),
 }
 
 func _ready():
@@ -45,7 +54,7 @@ func _process(delta):
 	handle_potion_inputs()
 
 func handle_movement(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	velocity = Vector2.ZERO # The player's movement vector.
 	for action in player_inputs:
 		if Input.is_action_pressed(action):
 			velocity += player_inputs[action]
@@ -59,22 +68,42 @@ func handle_movement(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-	if velocity.x != 0:
-		$AnimatedSprite2D.animation = &"right"
-		$AnimatedSprite2D.flip_v = false
-		$Trail.rotation = 0
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = &"up"
-		$AnimatedSprite2D.flip_v = velocity.y > 0
-		$Trail.rotation = PI if velocity.y > 0 else 0
+	if velocity.x > 0:
+		$Sprite2D.flip_h = true
+	elif velocity.x < 0:
+		$Sprite2D.flip_h = false
+	#if velocity.x != 0:
+	#	$AnimatedSprite2D.animation = &"right"
+	#	$AnimatedSprite2D.flip_v = false
+	#	$Trail.rotation = 0
+	#	$AnimatedSprite2D.flip_h = velocity.x < 0
+	#elif velocity.y != 0:
+	#	$AnimatedSprite2D.animation = &"up"
+	#	$AnimatedSprite2D.flip_v = velocity.y > 0
+	#	$Trail.rotation = PI if velocity.y > 0 else 0
 
 func handle_potion_inputs():
 	for potion_action in potion_input_effects:
 		if Input.is_action_just_pressed(potion_action):
 			var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
 			potion_func.call()
-
+			
+func cast_magicks():
+	
+	for dir in magick_dirs:
+		var fireball = Fireball.instantiate()
+		get_tree().root.get_node("Main").add_child(fireball)
+	
+		fireball.set_pos(position + (dir * 30))
+		fireball.set_dir(dir)
+		fireball.set_color(Color.DARK_ORANGE)
+		fireball.set_speed(1000)
+		fireball.set_ignore_target("Player")
+		fireball.on_death_callback = projectile_erase
+	
+		projectile_append.bind(fireball).call()
+	
+	
 func set_player_inputs(new_player_inputs):
 	player_inputs = new_player_inputs
 	
@@ -108,7 +137,7 @@ func potion_gain_mana(value):
 	mana = new_mana
 	pass
 	
-func potion_lose_mana(value):
+func potion_loose_mana(value):
 	var new_mana = clamp(mana - value, 0, PLAYER_MAX_MANA)
 	Game_HUD.update_mana(mana, new_mana);
 	mana = new_mana
@@ -126,7 +155,14 @@ func _on_Player_body_entered(_body):
 	#temp	
 	Game_HUD.update_health(health, health - 15)
 	health -= 15
-	
+	get_viewport().get_camera_2d().camera_shake(5)
 	check_player_health()
 	# Must be deferred as we can't change physics properties on a physics callback.
 #	$CollisionShape2D.set_deferred(&"disabled", true)
+
+
+func _on_cast_magick_timer_timeout():
+	if mana >= MAGICKS_MANA_COST:
+		cast_magicks()
+		potion_loose_mana(MAGICKS_MANA_COST)
+		

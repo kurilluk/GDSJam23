@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://rx7spwvtaiuv"
+path="res://.godot/imported/mask.png-7b4aa4355564282812e39c0fe4eaa2b4.res"
+
+[deps]
+
+source_file="res://assets/images/mask.png"
+dest_files=["res://.godot/imported/mask.png-7b4aa4355564282812e39c0fe4eaa2b4.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

@@ -6,11 +6,11 @@ var score
 const MAX_HEALTH = 5
 var health = MAX_HEALTH
 
-func _ready() -> void:
-	_set_health_label()
-
-func _set_health_label() -> void:
-	$HealthBar.text = "Health: %s" % health
+#func _ready() -> void:
+#	_set_health_label()
+#
+#func _set_health_label() -> void:
+#	$HealthBar.text = "Health: %s" % health
 
 func game_over():
 	$ScoreTimer.stop()

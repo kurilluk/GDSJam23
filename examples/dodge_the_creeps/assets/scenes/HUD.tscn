@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=6 format=3 uid="uid://ccqoreueuxdb7"]
 
-[ext_resource type="Script" path="res://HUD.gd" id="1"]
+[ext_resource type="Script" path="res://assets/scripts/HUD.gd" id="1_8bs4p"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
 action = &"start_game"
@@ -8,8 +8,16 @@ action = &"start_game"
 [sub_resource type="Shortcut" id="4"]
 events = [SubResource("InputEventAction_fopy7")]
 
-[node name="HUD" type="CanvasLayer"]
-script = ExtResource("1")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcm0f"]
+bg_color = Color(0.858824, 0, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp17v"]
+bg_color = Color(0.0352941, 0.517647, 0.85098, 1)
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "ManaBar")]
+script = ExtResource("1_8bs4p")
+HealthBar = NodePath("HealthBar")
+ManaBar = NodePath("ManaBar")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 10
@@ -52,6 +60,30 @@ text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+z_index = 10
+offset_left = 122.0
+offset_top = 1004.0
+offset_right = 372.0
+offset_bottom = 1074.0
+rotation = -1.57001
+theme_override_styles/fill = SubResource("StyleBoxFlat_dcm0f")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="ManaBar" type="ProgressBar" parent="."]
+z_index = 10
+offset_left = 1742.0
+offset_top = 1004.0
+offset_right = 1992.0
+offset_bottom = 1074.0
+rotation = -1.57001
+theme_override_styles/fill = SubResource("StyleBoxFlat_lp17v")
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

@@ -3,22 +3,15 @@ extends Node
 @export var mob_scene: PackedScene
 var score
 
-const MAX_HEALTH = 5
-var health = MAX_HEALTH
-
-#func _ready() -> void:
-#	_set_health_label()
-#
-#func _set_health_label() -> void:
-#	$HealthBar.text = "Health: %s" % health
+func _ready() -> void:
+	pass
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
 	$Music.stop()
-	$DeathSound.play()
-
+	#$DeathSound.play()
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
@@ -27,7 +20,7 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
-	$Music.play()
+	#$Music.play()
 
 
 func _on_MobTimer_timeout():
@@ -49,7 +42,7 @@ func _on_MobTimer_timeout():
 	mob.rotation = direction
 
 	# Choose the velocity for the mob.
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	var velocity = Vector2(randf_range(450.0, 850.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 
 	# Spawn the mob by adding it to the Main scene.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4vwrqjegqwpj"]
+[gd_scene load_steps=16 format=3 uid="uid://4vwrqjegqwpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/Player.gd" id="1_xm0s2"]
 [ext_resource type="Texture2D" uid="uid://ftkxr8r4qghp" path="res://art/playerGrey_walk1.png" id="2_ngcnf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4yyoafu8bi0q" path="res://art/playerGrey_up1.png" id="4_odtsq"]
 [ext_resource type="Texture2D" uid="uid://bko65a0nd66st" path="res://art/playerGrey_up2.png" id="5_cxyma"]
 [ext_resource type="Texture2D" uid="uid://3eg17k5kp83j" path="res://assets/sprites/player_test.png" id="6_cp04e"]
+[ext_resource type="Texture2D" uid="uid://je8cjivjthak" path="res://art/G_mage/G_mage.png" id="7_jf8c2"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -84,9 +85,14 @@ offset_right = 30.0
 offset_bottom = 30.0
 color = Color(0.439216, 0.552941, 0.678431, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D_old" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_cp04e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("7_jf8c2")
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

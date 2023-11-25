@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1t48gsc7f5bv"]
+[gd_scene load_steps=7 format=3 uid="uid://d1t48gsc7f5bv"]
 
 [ext_resource type="Texture2D" uid="uid://d2befv4ajehay" path="res://assets/images/bottom.png" id="1_m0tr8"]
 [ext_resource type="Texture2D" uid="uid://cbqnx0rdt6vp5" path="res://assets/images/top_new.png" id="2_s5amm"]
 [ext_resource type="Texture2D" uid="uid://bp4rhffdnn5nj" path="res://assets/images/texture.png" id="3_ixyl6"]
 [ext_resource type="BitMap" uid="uid://rx7spwvtaiuv" path="res://assets/images/mask.png" id="4_lcgni"]
+[ext_resource type="AudioStream" uid="uid://cr6a4sue4pr51" path="res://assets/sound/game_jam_2023_v1.mp3" id="5_o2i81"]
+[ext_resource type="Script" path="res://assets/scenes/SpeedSong.gd" id="6_ssbw1"]
 
 [node name="idea_diablo" type="Node2D"]
 
@@ -25,3 +27,10 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture_click_mask = ExtResource("4_lcgni")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_o2i81")
+autoplay = true
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("6_ssbw1")

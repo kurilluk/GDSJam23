@@ -107,7 +107,7 @@ texture_under = ExtResource("2_jl3v8")
 texture_over = ExtResource("3_4bm3m")
 texture_progress = ExtResource("4_2hixl")
 tint_under = Color(0.207843, 0.207843, 0.207843, 1)
-tint_progress = Color(0.823529, 0, 0, 1)
+tint_progress = Color(0.439216, 0.00784314, 0.0627451, 1)
 
 [node name="UnderlyingHealthBar" type="TextureProgressBar" parent="."]
 z_index = 9

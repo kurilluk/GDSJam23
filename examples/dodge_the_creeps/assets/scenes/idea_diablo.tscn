@@ -17,7 +17,7 @@ texture_under = ExtResource("1_m0tr8")
 texture_over = ExtResource("2_s5amm")
 texture_progress = ExtResource("3_ixyl6")
 tint_under = Color(0.207843, 0.207843, 0.207843, 1)
-tint_progress = Color(0.823529, 0, 0, 1)
+tint_progress = Color(0.352941, 0.0196078, 0.054902, 1)
 
 [node name="TextureButton" type="TextureButton" parent="."]
 visible = false

@@ -38,15 +38,23 @@ func _ready():
 	hide()
 
 func _process(delta):
+	handle_movement(delta)
+	handle_potion_inputs()
+
+func handle_movement(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
-	if Input.is_action_pressed(&"Right"):
-		velocity += player_inputs["Right"]
-	if Input.is_action_pressed(&"Left"):
-		velocity += player_inputs["Left"]
-	if Input.is_action_pressed(&"Down"):
-		velocity += player_inputs["Down"]
-	if Input.is_action_pressed(&"Up"):
-		velocity += player_inputs["Up"]
+	for action in player_inputs:
+		if Input.is_action_pressed(action):
+			velocity += player_inputs[action]
+			
+	#if Input.is_action_pressed(&"Right"):
+	#	velocity += player_inputs["Right"]
+	#if Input.is_action_pressed(&"Left"):
+	#	velocity += player_inputs["Left"]
+	#if Input.is_action_pressed(&"Down"):
+	#	velocity += player_inputs["Down"]
+	#if Input.is_action_pressed(&"Up"):
+	#	velocity += player_inputs["Up"]
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED
@@ -67,6 +75,12 @@ func _process(delta):
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 		$Trail.rotation = PI if velocity.y > 0 else 0
 
+func handle_potion_inputs():
+	for potion_action in potion_input_effects:
+		if Input.is_action_just_pressed(potion_action):
+			var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
+			potion_func.call()
+
 func set_player_inputs(new_player_inputs):
 	player_inputs = new_player_inputs
 	
@@ -83,21 +97,25 @@ func start(pos):
 func potion_heal(value):
 	var new_health = clamp(health + value, 0, PLAYER_MAX_HEALTH)
 	Game_HUD.update_health(health, new_health);
+	health = new_health
 	pass
 	
 func potion_hurt(value):
 	var new_health = clamp(health - value, 0, PLAYER_MAX_HEALTH)
 	Game_HUD.update_health(health, new_health);
+	health = new_health
 	pass
 
 func potion_gain_mana(value):
 	var new_mana = clamp(mana + value, 0, PLAYER_MAX_MANA)
 	Game_HUD.update_mana(mana, new_mana);
+	mana = new_mana
 	pass
 	
 func potion_lose_mana(value):
 	var new_mana = clamp(mana - value, 0, PLAYER_MAX_MANA)
 	Game_HUD.update_mana(mana, new_mana);
+	mana = new_mana
 	pass
 
 

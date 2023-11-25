@@ -1,6 +1,9 @@
 extends Node
+class_name Layer
 
 @export var background_color: Color
+@export var enemy_main_color: Color
+@export var enemy_off_color: Color
 
 @export var input_modification = {
 	"Left": Vector2.LEFT,
@@ -19,6 +22,12 @@ extends Node
 	"Potion_3": 2,
 	"Potion_4": 3
 }
+
+func get_input_modification():
+	return input_modification
+	
+func get_potion_modifications():
+	return potion_effects_modification
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

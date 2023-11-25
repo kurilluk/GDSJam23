@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyfwty2q3rdse"]
+[gd_scene load_steps=9 format=3 uid="uid://cyfwty2q3rdse"]
 
 [ext_resource type="Script" path="res://assets/scripts/Main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://assets/scenes/Mob.tscn" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://assets/scenes/HUD.tscn" id="4"]
 [ext_resource type="AudioStream" uid="uid://q2pf4fr8d0ks" path="res://art/House In a Forest Loop.ogg" id="5"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6"]
+[ext_resource type="PackedScene" uid="uid://da54cmhq2t3to" path="res://assets/scenes/Layer.tscn" id="7_23b4r"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -13,8 +14,10 @@ _data = {
 }
 point_count = 5
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("background", "layers")]
 script = ExtResource("1")
+background = NodePath("Background")
+layers = [NodePath("Layers/Layer"), NodePath("Layers/Layer_swap_x")]
 mob_scene = ExtResource("2")
 
 [node name="HUD" parent="." instance=ExtResource("4")]
@@ -34,15 +37,6 @@ color = Color(0.407843, 0.301961, 0.4, 1)
 [node name="Player" parent="." node_paths=PackedStringArray("Game_HUD") instance=ExtResource("3")]
 Game_HUD = NodePath("../HUD")
 
-[node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(890, 549)
 
@@ -57,10 +51,49 @@ stream = ExtResource("5")
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6")
 
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="Layer" parent="Layers" instance=ExtResource("7_23b4r")]
+position = Vector2(81, 568)
+background_color = Color(0.407843, 0.301961, 0.4, 1)
+enemy_main_color = Color(0.54902, 0.14902, 0.176471, 1)
+
+[node name="Layer_swap_x" parent="Layers" instance=ExtResource("7_23b4r")]
+position = Vector2(81, 568)
+enemy_main_color = Color(0.376471, 0.172549, 0.309804, 1)
+input_modification = {
+"Down": Vector2(0, 1),
+"Left": Vector2(1, 0),
+"Right": Vector2(-1, 0),
+"Up": Vector2(0, -1)
+}
+potion_effects_modification = {
+"Potion_1": 2,
+"Potion_2": 3,
+"Potion_3": 1,
+"Potion_4": 0
+}
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="MobTimer" type="Timer" parent="Timers"]
+wait_time = 0.35
+
+[node name="ScoreTimer" type="Timer" parent="Timers"]
+
+[node name="StartTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="LayerSwitchTimer" type="Timer" parent="Timers"]
+wait_time = 10.0
+autostart = true
+
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="on_death" from="Player" to="." method="game_over"]
-[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="Timers/MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="Timers/ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="Timers/LayerSwitchTimer" to="." method="_on_layer_switch_timer_timeout"]
 
 [editable path="HUD"]

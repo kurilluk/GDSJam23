@@ -31,7 +31,7 @@ func new_game():
 	$Player.projectile_erase = Callable(self, "erase_projectile")
 	$Timers/StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Get Ready")
+	$HUD.show_message("Here they come!")
 	$HUD.show_hud_bars()
 	set_new_layer(layers[0])
 

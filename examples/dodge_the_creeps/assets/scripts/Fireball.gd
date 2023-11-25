@@ -7,7 +7,7 @@ var on_death_callback: Callable
 var ignore_target
 
 func set_color(new_color):
-	$ProjectileRect.color = new_color
+	$FireballBottom.self_modulate = new_color
 
 func set_speed(new_speed):
 	self.speed = new_speed
@@ -15,7 +15,8 @@ func set_speed(new_speed):
 func set_ignore_target(target):
 	self.ignore_target = target
 
-func set_rot(rotation):
+func set_rot(new_rotation):
+	$FireballBottom.rotation = new_rotation
 	pass
 
 func set_dir(new_direction):

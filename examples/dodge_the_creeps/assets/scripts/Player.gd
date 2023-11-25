@@ -94,7 +94,10 @@ func cast_magicks():
 		var fireball = Fireball.instantiate()
 		get_tree().root.get_node("Main").add_child(fireball)
 	
-		fireball.set_pos(position + (dir * 30))
+		var rot = dir.x * PI/2 if dir.x != 0 else 0
+		rot = PI if dir.y > 0 else rot
+		fireball.set_rot(rot)
+		fireball.set_pos(position + (dir * 45))
 		fireball.set_dir(dir)
 		fireball.set_color(Color.DARK_ORANGE)
 		fireball.set_speed(1000)

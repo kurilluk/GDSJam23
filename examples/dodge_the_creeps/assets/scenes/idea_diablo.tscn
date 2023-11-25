@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1t48gsc7f5bv"]
+
+[ext_resource type="Texture2D" uid="uid://b2w0n7vs40ktk" path="res://assets/sprites/hud_bars/bottom.png" id="1_m0tr8"]
+[ext_resource type="Texture2D" uid="uid://dxfq2x57j2vm" path="res://assets/sprites/hud_bars/top_new.png" id="2_s5amm"]
+[ext_resource type="Texture2D" uid="uid://rh3sxam8isjm" path="res://assets/sprites/hud_bars/texture.png" id="3_ixyl6"]
+
+[node name="idea_diablo" type="Node2D"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 417.0
+offset_top = 352.0
+offset_right = 584.0
+offset_bottom = 524.0
+value = 10.0
+fill_mode = 3
+texture_under = ExtResource("1_m0tr8")
+texture_over = ExtResource("2_s5amm")
+texture_progress = ExtResource("3_ixyl6")
+tint_under = Color(0.207843, 0.207843, 0.207843, 1)
+tint_progress = Color(0.823529, 0, 0, 1)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0

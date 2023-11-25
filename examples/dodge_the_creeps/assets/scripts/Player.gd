@@ -8,6 +8,7 @@ signal hit
 @export var Game_HUD: HUD
 var health
 var mana
+var player_dead
 var screen_size # Size of the game window.
 
 signal on_death
@@ -38,6 +39,8 @@ func _ready():
 	hide()
 
 func _process(delta):
+	if player_dead:
+		return
 	handle_movement(delta)
 	handle_potion_inputs()
 
@@ -46,15 +49,6 @@ func handle_movement(delta):
 	for action in player_inputs:
 		if Input.is_action_pressed(action):
 			velocity += player_inputs[action]
-			
-	#if Input.is_action_pressed(&"Right"):
-	#	velocity += player_inputs["Right"]
-	#if Input.is_action_pressed(&"Left"):
-	#	velocity += player_inputs["Left"]
-	#if Input.is_action_pressed(&"Down"):
-	#	velocity += player_inputs["Down"]
-	#if Input.is_action_pressed(&"Up"):
-	#	velocity += player_inputs["Up"]
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED
@@ -91,6 +85,7 @@ func start(pos):
 	position = pos
 	health = PLAYER_MAX_HEALTH
 	mana = PLAYER_MAX_MANA
+	player_dead = false
 	show()
 	$CollisionShape2D.disabled = false
 
@@ -104,6 +99,7 @@ func potion_hurt(value):
 	var new_health = clamp(health - value, 0, PLAYER_MAX_HEALTH)
 	Game_HUD.update_health(health, new_health);
 	health = new_health
+	check_player_health()
 	pass
 
 func potion_gain_mana(value):
@@ -118,15 +114,19 @@ func potion_lose_mana(value):
 	mana = new_mana
 	pass
 
+func check_player_health():
+	if health <= 0:
+		on_death.emit()
+		player_dead = true
+		hide()
 
 func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
 	hit.emit()
-	#temp
-	health -= 15
+	#temp	
 	Game_HUD.update_health(health, health - 15)
+	health -= 15
 	
-	if health <= 0:
-		on_death.emit()
+	check_player_health()
 	# Must be deferred as we can't change physics properties on a physics callback.
 #	$CollisionShape2D.set_deferred(&"disabled", true)

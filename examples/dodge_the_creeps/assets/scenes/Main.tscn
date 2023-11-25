@@ -17,10 +17,12 @@ point_count = 5
 [node name="Main" type="Node" node_paths=PackedStringArray("background", "layers")]
 script = ExtResource("1")
 background = NodePath("Background")
-layers = [NodePath("Layers/Layer"), NodePath("Layers/Layer_swap_x")]
+layers = [NodePath("Layers/Layer"), NodePath("Layers/Layer_swap_x"), NodePath("Layers/Layer_swap_xy")]
 mob_scene = ExtResource("2")
 
-[node name="HUD" parent="." instance=ExtResource("4")]
+[node name="HUD" parent="." node_paths=PackedStringArray("HealthBar", "ManaBar") instance=ExtResource("4")]
+HealthBar = NodePath("HealthBar")
+ManaBar = NodePath("ManaBar")
 
 [node name="ScoreLabel" parent="HUD" index="0"]
 visible = false
@@ -72,6 +74,23 @@ potion_effects_modification = {
 "Potion_2": 3,
 "Potion_3": 1,
 "Potion_4": 0
+}
+
+[node name="Layer_swap_xy" parent="Layers" instance=ExtResource("7_23b4r")]
+position = Vector2(81, 568)
+background_color = Color(0.552941, 0.25098, 0.137255, 1)
+enemy_main_color = Color(0.0901961, 0.258824, 0.282353, 1)
+input_modification = {
+"Down": Vector2(0, -1),
+"Left": Vector2(1, 0),
+"Right": Vector2(-1, 0),
+"Up": Vector2(0, 1)
+}
+potion_effects_modification = {
+"Potion_1": 3,
+"Potion_2": 0,
+"Potion_3": 1,
+"Potion_4": 2
 }
 
 [node name="Timers" type="Node2D" parent="."]

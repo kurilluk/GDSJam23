@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=14 format=3 uid="uid://ccqoreueuxdb7"]
 
 [ext_resource type="Script" path="res://assets/scripts/HUD.gd" id="1_8bs4p"]
 [ext_resource type="Texture2D" uid="uid://b2w0n7vs40ktk" path="res://assets/sprites/hud_bars/bottom.png" id="2_jl3v8"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://cp35k30xc2faq" path="res://art/HUB.png" id="5_jwupg"]
 [ext_resource type="PackedScene" uid="uid://c00egfmkn80e6" path="res://assets/scenes/Potions.tscn" id="5_kv5n5"]
 [ext_resource type="AudioStream" uid="uid://c32f3oisqirbn" path="res://assets/sound/Startgame.mp3" id="7_5cjpo"]
+[ext_resource type="Texture2D" uid="uid://dtkqqt2iuj2g1" path="res://art/buttons/1B.png" id="8_vs5at"]
+[ext_resource type="Texture2D" uid="uid://dwe3183n7foil" path="res://art/buttons/2A.png" id="9_lsff2"]
+[ext_resource type="Texture2D" uid="uid://d2256wjmlqyct" path="res://art/buttons/3Y.png" id="10_px1d8"]
+[ext_resource type="Texture2D" uid="uid://dgsk1ldx33pbq" path="res://art/buttons/4X.png" id="11_7mmmq"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
 action = &"start_game"
@@ -69,9 +73,9 @@ one_shot = true
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 z_index = 10
 offset_left = 507.5
-offset_top = 888.0
+offset_top = 896.0
 offset_right = 672.5
-offset_bottom = 1054.0
+offset_bottom = 1062.0
 value = 100.0
 fill_mode = 3
 texture_under = ExtResource("2_jl3v8")
@@ -83,9 +87,9 @@ tint_progress = Color(0.52549, 0.0509804, 0.0509804, 1)
 [node name="UnderlyingHealthBar" type="TextureProgressBar" parent="."]
 z_index = 9
 offset_left = 506.5
-offset_top = 888.0
+offset_top = 896.0
 offset_right = 673.5
-offset_bottom = 1060.0
+offset_bottom = 1068.0
 value = 100.0
 fill_mode = 3
 texture_progress = ExtResource("4_2hixl")
@@ -95,9 +99,9 @@ tint_progress = Color(0.356863, 0, 0.00392157, 0.768627)
 [node name="ManaBar" type="TextureProgressBar" parent="."]
 z_index = 10
 offset_left = 1207.5
-offset_top = 888.0
+offset_top = 896.0
 offset_right = 1374.5
-offset_bottom = 1060.0
+offset_bottom = 1068.0
 value = 100.0
 fill_mode = 3
 texture_under = ExtResource("2_jl3v8")
@@ -109,9 +113,9 @@ tint_progress = Color(0.0784314, 0.203922, 0.411765, 1)
 [node name="UnderlyingManaBar" type="TextureProgressBar" parent="."]
 z_index = 9
 offset_left = 1205.5
-offset_top = 888.0
+offset_top = 896.0
 offset_right = 1372.5
-offset_bottom = 1060.0
+offset_bottom = 1068.0
 value = 100.0
 fill_mode = 3
 texture_progress = ExtResource("4_2hixl")
@@ -128,15 +132,38 @@ offset_bottom = 1247.0
 mouse_filter = 2
 
 [node name="HubFrame" type="Sprite2D" parent="."]
-position = Vector2(940, 975)
+position = Vector2(940, 983)
 texture = ExtResource("5_jwupg")
 
 [node name="Potions" parent="." instance=ExtResource("5_kv5n5")]
-position = Vector2(767.5, 931)
+position = Vector2(754, 935)
 scale = Vector2(0.5, 0.5)
 
 [node name="Play" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_5cjpo")
+
+[node name="Buttons" type="Node2D" parent="."]
+position = Vector2(-7, 8)
+
+[node name="1b" type="Sprite2D" parent="Buttons"]
+position = Vector2(810, 1040)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_vs5at")
+
+[node name="2a" type="Sprite2D" parent="Buttons"]
+position = Vector2(910, 1040)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_lsff2")
+
+[node name="3y" type="Sprite2D" parent="Buttons"]
+position = Vector2(1010, 1040)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_px1d8")
+
+[node name="4x" type="Sprite2D" parent="Buttons"]
+position = Vector2(1095, 1040)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_7mmmq")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

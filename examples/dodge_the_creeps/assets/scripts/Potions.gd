@@ -2,12 +2,12 @@ extends Node2D
 
 @export var PotionBars: Array[TextureProgressBar]
 
-var potion_cooldown = 1.0
+var potion_cooldown = 0.1
 
-var potion_use_empty_dur = 0.15
-var potion_use_scale_down_val = 0.65
-var potion_use_scale_down_dur = 0.1
-var potion_use_scale_up_dur = 0.4
+var potion_use_empty_dur = 0.05
+var potion_use_scale_down_val = 1
+var potion_use_scale_down_dur = 0
+var potion_use_scale_up_dur = 0
 
 var potions_name_index_map = {
 	"Potion_1": 0,

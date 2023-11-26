@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://assets/scenes/Mob.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://assets/scenes/Player.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://assets/scenes/HUD.tscn" id="4"]
-[ext_resource type="Texture2D" uid="uid://cwakwa3m62x4c" path="res://art/background_map.png" id="4_yf735"]
+[ext_resource type="Texture2D" uid="uid://lr4ehat4x43v" path="res://art/background_biger.png" id="4_6sh37"]
 [ext_resource type="AudioStream" uid="uid://q2pf4fr8d0ks" path="res://art/House In a Forest Loop.ogg" id="5"]
 [ext_resource type="PackedScene" uid="uid://ddifmu7obmqe2" path="res://assets/scenes/Fireball.tscn" id="5_h27ax"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6"]
@@ -28,9 +28,9 @@ HealthBar = NodePath("HealthBar")
 ManaBar = NodePath("ManaBar")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(961, 542.5)
+position = Vector2(961, 543)
 scale = Vector2(0.997917, 1.00648)
-texture = ExtResource("4_yf735")
+texture = ExtResource("4_6sh37")
 
 [node name="Player" parent="." node_paths=PackedStringArray("Game_HUD") instance=ExtResource("3")]
 Game_HUD = NodePath("../HUD")

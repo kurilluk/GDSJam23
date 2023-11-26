@@ -26,7 +26,7 @@ func show_message(text):
 	$MessageTimer.start()
 
 func show_hud_bars():
-	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar, HudFrame, PotionsScene]
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]  #, HudFrame, PotionsScene
 	var show_tween = create_tween()
 	show_tween.set_parallel(true)
 	for bar in bars:
@@ -34,7 +34,7 @@ func show_hud_bars():
 		show_tween.tween_property(bar, "modulate", Color.WHITE, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)	
 
 func hide_hud_bars():
-	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar, HudFrame, PotionsScene]
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar] #, HudFrame, PotionsScene
 	var hide_tween = create_tween()
 	hide_tween.set_parallel(true)
 	for bar in bars:
@@ -48,7 +48,7 @@ func set_hud_bars():
 		bar.value = 100
 
 func hud_bars_hidden():
-	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar, HudFrame, PotionsScene]
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar] #, HudFrame, PotionsScene
 	for bar in bars:
 		bar.modulate = Color.TRANSPARENT
 

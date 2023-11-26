@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://assets/scenes/HUD.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://lr4ehat4x43v" path="res://art/background_biger.png" id="4_6sh37"]
 [ext_resource type="PackedScene" uid="uid://ddifmu7obmqe2" path="res://assets/scenes/Fireball.tscn" id="5_h27ax"]
-[ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6"]
 [ext_resource type="PackedScene" uid="uid://da54cmhq2t3to" path="res://assets/scenes/Layer.tscn" id="7_23b4r"]
 [ext_resource type="AudioStream" uid="uid://x4fnidkndycy" path="res://assets/sound/soundtrack1.mp3" id="7_u85tg"]
+[ext_resource type="AudioStream" uid="uid://b005lep86v3yf" path="res://assets/sound/Gameover.mp3" id="8_3ml3g"]
 [ext_resource type="Script" path="res://assets/scripts/Camera.gd" id="8_3uva2"]
 
 [sub_resource type="Curve2D" id="1"]
@@ -48,7 +48,7 @@ curve = SubResource("1")
 stream = ExtResource("7_u85tg")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6")
+stream = ExtResource("8_3ml3g")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -113,7 +113,7 @@ potion_effects_modification = {
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="MobTimer" type="Timer" parent="Timers"]
-wait_time = 0.35
+wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="Timers"]
 

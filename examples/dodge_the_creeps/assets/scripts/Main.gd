@@ -4,7 +4,7 @@ extends Node
 @export var layers: Array[Layer]
 @export var enemy_proj_scene: PackedScene
 
-@export var enemy_spawn_amount = 2
+@export var enemy_spawn_amount = 1
 var score
 var current_layer
 var enemy_projectiles: Array[EnemyProjectile]
@@ -23,7 +23,7 @@ func game_over():
 	$HUD.show_game_over()
 	$HUD.hide_hud_bars()
 	$Music.stop()
-	#$DeathSound.play()
+	$DeathSound.play()
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")

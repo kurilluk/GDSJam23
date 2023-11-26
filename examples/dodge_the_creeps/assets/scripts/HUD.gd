@@ -6,7 +6,8 @@ signal start_game
 @export var UnderlyingHealthBar: TextureProgressBar
 @export var ManaBar: TextureProgressBar
 @export var UnderlyingManaBar: TextureProgressBar
-
+@export var HudFrame: Sprite2D
+@export var PotionsScene: Node2D
 @export var ColorFadeRect: ColorRect
 
 @export var bar_tween_first_dur = 0.15
@@ -25,7 +26,7 @@ func show_message(text):
 	$MessageTimer.start()
 
 func show_hud_bars():
-	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar, HudFrame, PotionsScene]
 	var show_tween = create_tween()
 	show_tween.set_parallel(true)
 	for bar in bars:
@@ -33,7 +34,7 @@ func show_hud_bars():
 		show_tween.tween_property(bar, "modulate", Color.WHITE, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)	
 
 func hide_hud_bars():
-	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar, HudFrame, PotionsScene]
 	var hide_tween = create_tween()
 	hide_tween.set_parallel(true)
 	for bar in bars:
@@ -47,7 +48,7 @@ func set_hud_bars():
 		bar.value = 100
 
 func hud_bars_hidden():
-	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]
+	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar, HudFrame, PotionsScene]
 	for bar in bars:
 		bar.modulate = Color.TRANSPARENT
 
@@ -103,8 +104,9 @@ func fade_layer_switch(callback: Callable):
 	var layer_fade_tween = create_tween()
 	
 	layer_fade_tween.tween_property(ColorFadeRect, "modulate", Color.WHITE, 0.25).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	layer_fade_tween.tween_property(ColorFadeRect, "modulate", Color.TRANSPARENT, 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	layer_fade_tween.tween_callback(callback)
+	layer_fade_tween.tween_property(ColorFadeRect, "modulate", Color.TRANSPARENT, 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	
 
 func update_score(score):
 	$ScoreLabel.text = str(score)

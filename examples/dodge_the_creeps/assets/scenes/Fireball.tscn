@@ -85,7 +85,6 @@ z_index = 3
 texture = ExtResource("3_hlxu0")
 
 [node name="Trail" type="GPUParticles2D" parent="FireballBottom"]
-visible = false
 z_index = -1
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_o6fmy")

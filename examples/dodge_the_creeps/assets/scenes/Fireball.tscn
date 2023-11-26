@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddifmu7obmqe2"]
+[gd_scene load_steps=6 format=3 uid="uid://ddifmu7obmqe2"]
 
 [ext_resource type="Script" path="res://assets/scripts/Fireball.gd" id="1_g27v3"]
 [ext_resource type="Texture2D" uid="uid://ujab88aefoss" path="res://assets/sprites/projectiles/fireball_white_bottom.png" id="2_awhom"]
 [ext_resource type="Texture2D" uid="uid://cda4ju411if4h" path="res://assets/sprites/projectiles/fireball_white_top.png" id="3_hlxu0"]
+[ext_resource type="AudioStream" uid="uid://bwrorlrgppgry" path="res://assets/sound/Fireball1.mp3" id="4_r4vrk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdiw0"]
 radius = 23.0
@@ -31,6 +32,9 @@ texture = ExtResource("2_awhom")
 [node name="FireballTop" type="Sprite2D" parent="FireballBottom"]
 z_index = 3
 texture = ExtResource("3_hlxu0")
+
+[node name="Fire_1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_r4vrk")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

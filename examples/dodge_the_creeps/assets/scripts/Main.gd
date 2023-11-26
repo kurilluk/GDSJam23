@@ -4,7 +4,7 @@ extends Node
 @export var layers: Array[Layer]
 @export var enemy_proj_scene: PackedScene
 
-@export var enemy_spawn_amount = 1
+@export var enemy_spawn_amount = 3
 var score
 var current_layer
 var enemy_projectiles: Array[EnemyProjectile]
@@ -23,11 +23,13 @@ func game_over():
 	$HUD.show_game_over()
 	$HUD.hide_hud_bars()
 	$Music.stop()
+	$Player/CollisionShape2D.disabled = true
 	$DeathSound.play()
 
 func new_game():
-	get_tree().call_group(&"mobs", &"queue_free")
+	get_tree().call_group(&"Projectiles", &"queue_free")
 	score = 0
+	$Player/CollisionShape2D.disabled = false
 	$Player.start($StartPosition.position)
 	$Player.projectile_append = Callable(self, "append_projectile")
 	$Player.projectile_erase = Callable(self, "erase_projectile")
@@ -52,7 +54,7 @@ func set_new_layer(layer: Layer):
 	$Music.pitch_scale = pitch
 	$Music.play()
 	pitch += 0.25
-	if pitch >= 2:
+	if pitch >= 2.5:
 		pitch = 1
 	
 	background.modulate = layer.background_color
@@ -69,12 +71,12 @@ func set_enemy_colors(color):
 			remove_last.append(-i -1)
 			break
 		enemy.set_color(color)
-
+		
 	for index in remove_last:
 		enemy_projectiles.remove_at(index)
 
 func _on_MobTimer_timeout():
-	for i in enemy_spawn_amount:
+	for i in range(0 , int(pitch)):
 	# Create a new instance of the Mob scene.
 		var e_proj = enemy_proj_scene.instantiate()
 

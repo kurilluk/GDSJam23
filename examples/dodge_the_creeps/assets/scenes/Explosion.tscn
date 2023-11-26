@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba8s1st1lqc5e"]
+
+[ext_resource type="Script" path="res://assets/scripts/Explosion.gd" id="1_56mcp"]
+[ext_resource type="Texture2D" uid="uid://bd727f5pbmau1" path="res://assets/sprites/Impact_fireball_white_bottom.png" id="1_grnxu"]
+[ext_resource type="Texture2D" uid="uid://280iabtmliix" path="res://assets/sprites/impact_fireball_white_top.png" id="2_e7p0s"]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_56mcp")
+
+[node name="ExplosionBottom" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.776471, 0.435294, 0.0431373, 1)
+z_index = 6
+texture = ExtResource("1_grnxu")
+
+[node name="ExplosionTop" type="Sprite2D" parent="ExplosionBottom"]
+z_index = 7
+texture = ExtResource("2_e7p0s")

@@ -125,10 +125,10 @@ tint_progress = Color(0.0509804, 0.152941, 0.317647, 0.768627)
 [node name="ColorFade" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = 999
-offset_left = 53.0
-offset_top = 74.0
-offset_right = 2315.0
-offset_bottom = 1473.0
+offset_left = -144.0
+offset_top = -155.0
+offset_right = 2118.0
+offset_bottom = 1244.0
 mouse_filter = 2
 
 [node name="HubFrame" type="Sprite2D" parent="."]

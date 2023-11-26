@@ -20,7 +20,7 @@ point_count = 5
 [node name="Main" type="Node" node_paths=PackedStringArray("background", "layers")]
 script = ExtResource("1")
 background = NodePath("Background")
-layers = [NodePath("Layers/Layer"), NodePath("Layers/Layer_swap_x"), NodePath("Layers/Layer_swap_xy")]
+layers = [NodePath("Layers/Layer"), NodePath("Layers/Layer_swap_x"), NodePath("Layers/Layer_swap_xy"), NodePath("Layers/Layer_swap_y")]
 enemy_proj_scene = ExtResource("2_fweqn")
 
 [node name="HUD" parent="." node_paths=PackedStringArray("HealthBar", "ManaBar") instance=ExtResource("4")]
@@ -104,16 +104,16 @@ input_modification = {
 "Up": Vector2(0, 1)
 }
 potion_effects_modification = {
-"Potion_1": 3,
-"Potion_2": 0,
-"Potion_3": 1,
-"Potion_4": 2
+"Potion_1": 1,
+"Potion_2": 3,
+"Potion_3": 4,
+"Potion_4": 0
 }
 
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="MobTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
+wait_time = 0.4
 
 [node name="ScoreTimer" type="Timer" parent="Timers"]
 
@@ -138,3 +138,5 @@ script = ExtResource("8_3uva2")
 [connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="Timers/LayerSwitchTimer" to="." method="_on_layer_switch_timer_timeout"]
 [connection signal="timeout" from="Timers/CastMagickTimer" to="Player" method="_on_cast_magick_timer_timeout"]
+
+[editable path="Player"]

@@ -1,6 +1,7 @@
 extends Area2D
 class_name Fireball
 
+@export var ExplosionEffect: PackedScene
 @export var intensity_curve: Curve
 @export var intensity_curve_scale = 0.25
 var random_curve_offset: int
@@ -73,8 +74,15 @@ func _on_screen_exited():
 	
 func destroy_self():
 	fade_out(0.1, 1.0, Callable(self, "queue_free"))
+	explosion_effect()
 	on_death_callback.bind(self).call()
-	
+
+func explosion_effect():
+	var exp_inst = ExplosionEffect.instantiate()
+	get_tree().root.get_node("Main").add_child(exp_inst)
+	exp_inst.set_new_color($FireballBottom.self_modulate)
+	exp_inst.position = self.position
+
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://4vwrqjegqwpj"]
+[gd_scene load_steps=22 format=3 uid="uid://4vwrqjegqwpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/Player.gd" id="1_xm0s2"]
 [ext_resource type="Texture2D" uid="uid://ftkxr8r4qghp" path="res://art/playerGrey_walk1.png" id="2_ngcnf"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://d1cisdls5cyyn" path="res://assets/sound/Vocal_Ineedapotion_lowhp.mp3" id="8_ieq6g"]
 [ext_resource type="AudioStream" uid="uid://bwrorlrgppgry" path="res://assets/sound/Fireball1.mp3" id="9_55jwn"]
 [ext_resource type="AudioStream" uid="uid://iy1ta5mbu2t1" path="res://assets/sound/Healing_potion.mp3" id="11_t44o3"]
+[ext_resource type="AudioStream" uid="uid://drj07yj5x5rw3" path="res://assets/sound/Mana_potion.mp3" id="12_j8lnq"]
 [ext_resource type="AudioStream" uid="uid://5ia8eybkn3ya" path="res://assets/sound/Healingdrain_potion.mp3" id="12_p4aha"]
 [ext_resource type="AudioStream" uid="uid://d324dl36pt0fs" path="res://assets/sound/Manadrain_potion.mp3" id="13_1pnjb"]
 
@@ -108,7 +109,7 @@ stream = ExtResource("12_p4aha")
 stream = ExtResource("11_t44o3")
 
 [node name="S_HealPotionDrain" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_p4aha")
+stream = ExtResource("12_j8lnq")
 
 [node name="S_ManaPotionDrain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_1pnjb")

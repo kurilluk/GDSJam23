@@ -36,9 +36,9 @@ var potion_input_effects = {
 }
 
 var potion_effects = {
-	0: Callable(self, "potion_heal").bind(15),
+	0: Callable(self, "potion_heal").bind(20),
 	1: Callable(self, "potion_hurt").bind(10),
-	2: Callable(self, "potion_gain_mana").bind(15),
+	2: Callable(self, "potion_gain_mana").bind(30),
 	3: Callable(self, "potion_loose_mana").bind(10),
 }
 
@@ -89,6 +89,11 @@ func handle_potion_inputs():
 				var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
 				potion_func.call()
 				
+func player_hurt_effect():
+	var tweener = create_tween()
+	tweener.tween_property($Sprite2D, "modulate", Color.DARK_RED, 0.15)
+	tweener.tween_property($Sprite2D, "modulate", Color.WHITE, 0.15)
+
 func cast_magicks():	
 	$Fire_1.play()
 	
@@ -166,12 +171,13 @@ func check_player_health():
 func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
 	if _body.is_in_group("Projectile"):
+		player_hurt_effect()
 		_body.destroy_self()
 		hit.emit()
 		$HitSound.play()
 	#temp
-		Game_HUD.update_health(health, health - 15)
-		health -= 15
+		Game_HUD.update_health(health, health - 10)
+		health -= 10
 		get_viewport().get_camera_2d().camera_shake(5)
 		check_player_health()
 	# Must be deferred as we can't change physics properties on a physics callback.

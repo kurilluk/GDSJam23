@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://rkdnhqgf2hpj"]
+[gd_scene load_steps=18 format=3 uid="uid://rkdnhqgf2hpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/EnemyProjectile.gd" id="1_52uug"]
+[ext_resource type="PackedScene" uid="uid://ba8s1st1lqc5e" path="res://assets/scenes/Explosion.tscn" id="2_03v0x"]
 [ext_resource type="Texture2D" uid="uid://ujab88aefoss" path="res://assets/sprites/projectiles/fireball_white_bottom.png" id="8_fl6st"]
 [ext_resource type="Texture2D" uid="uid://cda4ju411if4h" path="res://assets/sprites/projectiles/fireball_white_top.png" id="9_u15j2"]
 [ext_resource type="AudioStream" uid="uid://dfgfr12prj7tl" path="res://assets/sound/Fireball2.mp3" id="10_u304x"]
@@ -65,6 +66,7 @@ fill_to = Vector2(0, 0)
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_52uug")
+ExplosionEffect = ExtResource("2_03v0x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

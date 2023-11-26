@@ -1,6 +1,6 @@
 extends Node
 
-@export var background: ColorRect
+@export var background: Sprite2D
 @export var layers: Array[Layer]
 @export var mob_scene: PackedScene
 
@@ -43,7 +43,7 @@ func erase_projectile(projectile):
 	#$Music.play()
 func set_new_layer(layer: Layer):	
 	current_layer = layer
-	background.color = layer.background_color
+	background.modulate = layer.background_color
 	$Player.set_player_inputs(layer.get_input_modification())
 	$Player.set_potion_effects(layer.get_potion_modifications())
 	

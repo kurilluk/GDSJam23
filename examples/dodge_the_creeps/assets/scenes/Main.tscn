@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyfwty2q3rdse"]
+[gd_scene load_steps=12 format=3 uid="uid://cyfwty2q3rdse"]
 
 [ext_resource type="Script" path="res://assets/scripts/Main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://assets/scenes/Mob.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://assets/scenes/Player.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://assets/scenes/HUD.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://cwakwa3m62x4c" path="res://art/background_map.png" id="4_yf735"]
 [ext_resource type="AudioStream" uid="uid://q2pf4fr8d0ks" path="res://art/House In a Forest Loop.ogg" id="5"]
 [ext_resource type="PackedScene" uid="uid://ddifmu7obmqe2" path="res://assets/scenes/Fireball.tscn" id="5_h27ax"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6"]
@@ -29,7 +30,8 @@ ManaBar = NodePath("ManaBar")
 [node name="ScoreLabel" parent="HUD" index="0"]
 visible = false
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background_old" type="ColorRect" parent="."]
+visible = false
 z_index = -100
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +39,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.407843, 0.301961, 0.4, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(961, 542.5)
+scale = Vector2(0.997917, 1.00648)
+texture = ExtResource("4_yf735")
 
 [node name="Player" parent="." node_paths=PackedStringArray("Game_HUD") instance=ExtResource("3")]
 Game_HUD = NodePath("../HUD")

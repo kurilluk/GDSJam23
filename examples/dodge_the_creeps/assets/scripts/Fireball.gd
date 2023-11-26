@@ -27,6 +27,9 @@ func set_pos(new_position):
 	position = new_position
 	pass
 	
+func _ready():
+	$Fire_1.play()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position = position + (direction * speed * delta)

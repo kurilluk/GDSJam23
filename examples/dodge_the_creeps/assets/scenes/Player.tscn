@@ -95,4 +95,7 @@ texture = ExtResource("6_cp04e")
 position = Vector2(0, -5)
 texture = ExtResource("7_jf8c2")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

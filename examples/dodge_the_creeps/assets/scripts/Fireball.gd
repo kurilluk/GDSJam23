@@ -71,8 +71,8 @@ func _on_screen_exited():
 	destroy_self()
 	pass # Replace with function body.
 	
-func destroy_self():	
-	fade_out(0.15, 1.0, Callable(self, "queue_free"))
+func destroy_self():
+	fade_out(0.1, 1.0, Callable(self, "queue_free"))
 	on_death_callback.bind(self).call()
 	
 func _on_body_entered(body):

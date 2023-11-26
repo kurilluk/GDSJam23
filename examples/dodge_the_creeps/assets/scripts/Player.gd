@@ -88,7 +88,7 @@ func handle_potion_inputs():
 				Game_HUD.use_potion(potion_action)
 				var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
 				potion_func.call()
-			
+				
 func cast_magicks():
 	var player_dir = velocity.normalized()
 	if velocity.length() == 0:
@@ -110,7 +110,7 @@ func cast_magicks():
 		
 		projectile_append.bind(fireball).call()
 	
-	
+
 func set_player_inputs(new_player_inputs):
 	player_inputs = new_player_inputs
 	
@@ -130,7 +130,7 @@ func potion_heal(value):
 	var new_health = clamp(health + value, 0, PLAYER_MAX_HEALTH)
 	Game_HUD.update_health(health, new_health);
 	health = new_health
-	$S_HealPotion.play()
+	#$S_HealPotion.play()
 	pass
 	
 func potion_hurt(value):
@@ -138,21 +138,21 @@ func potion_hurt(value):
 	Game_HUD.update_health(health, new_health);
 	health = new_health
 	check_player_health()
-	$S_HealPotionDrain.play()
+	#$S_HealPotionDrain.play()
 	pass
 
 func potion_gain_mana(value):
 	var new_mana = clamp(mana + value, 0, PLAYER_MAX_MANA)
 	Game_HUD.update_mana(mana, new_mana);
 	mana = new_mana
-	$S_ManaPotion.play()
+	#$S_ManaPotion.play()
 	pass
-	
+
 func potion_loose_mana(value):
 	var new_mana = clamp(mana - value, 0, PLAYER_MAX_MANA)
 	Game_HUD.update_mana(mana, new_mana);
 	mana = new_mana
-	$S_ManaPotionDrain.play()
+	#$S_ManaPotionDrain.play()
 	pass
 
 func check_player_health():

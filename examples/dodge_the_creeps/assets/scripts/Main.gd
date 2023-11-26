@@ -2,12 +2,12 @@ extends Node
 
 @export var background: Sprite2D
 @export var layers: Array[Layer]
-@export var mob_scene: PackedScene
+@export var enemy_proj_scene: PackedScene
 
 @export var enemy_spawn_amount = 2
 var score
 var current_layer
-var enemies: Array[Mob]
+var enemy_projectiles: Array[EnemyProjectile]
 var player_projectiles: Array[Fireball]
 var level = 0
 var pitch = 1
@@ -63,43 +63,46 @@ func set_new_layer(layer: Layer):
 	
 func set_enemy_colors(color):
 	var remove_last = []
-	for i in enemies.size():
-		var enemy = enemies[-i-1]
+	for i in enemy_projectiles.size():
+		var enemy = enemy_projectiles[-i-1]
 		if enemy == null:
 			remove_last.append(-i -1)
 			break
 		enemy.set_color(color)
 
 	for index in remove_last:
-		enemies.remove_at(index)
+		enemy_projectiles.remove_at(index)
 
 func _on_MobTimer_timeout():
 	for i in enemy_spawn_amount:
 	# Create a new instance of the Mob scene.
-		var mob = mob_scene.instantiate()
+		var e_proj = enemy_proj_scene.instantiate()
 
 	# Choose a random location on Path2D.
-		var mob_spawn_location = get_node(^"MobPath/MobSpawnLocation")
-		mob_spawn_location.progress = randi()
+		var e_projectile_spawn_location = get_node(^"MobPath/MobSpawnLocation")
+		e_projectile_spawn_location.progress = randi()
 
 	# Set the mob's direction perpendicular to the path direction.
-		var direction = mob_spawn_location.rotation + PI / 2
+		var direction = e_projectile_spawn_location.position.angle_to_point($Player.position)
+		#e_projectile_spawn_location.rotation
 
 	# Set the mob's position to a random location.
-		mob.position = mob_spawn_location.position
+		e_proj.position = e_projectile_spawn_location.position
 
-	# Add some randomness to the direction.
-		direction += randf_range(-PI / 4, PI / 4)
-		mob.rotation = direction
 
 	# Choose the velocity for the mob.
 		var velocity = Vector2(randf_range(650.0, 850.0), 0.0)
-		mob.linear_velocity = velocity.rotated(direction)
+		e_proj.linear_velocity = velocity.rotated(direction)
+		
+	# Add some randomness to the direction.
+		direction += randf_range(-PI / 4, PI / 4)
+		e_proj.set_new_rotation(Vector2.UP.angle_to(velocity.normalized()))
 	
-		mob.set_color(current_layer.enemy_main_color)
-		enemies.append(mob)
+	
+		e_proj.set_color(current_layer.enemy_main_color)
+		enemy_projectiles.append(e_proj)
 	# Spawn the mob by adding it to the Main scene.
-		add_child(mob)
+		add_child(e_proj)
 
 func _on_ScoreTimer_timeout():
 	score += 1

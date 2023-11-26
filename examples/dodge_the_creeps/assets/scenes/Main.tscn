@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cyfwty2q3rdse"]
 
 [ext_resource type="Script" path="res://assets/scripts/Main.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://assets/scenes/Mob.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://assets/scenes/EnemyProjectile.tscn" id="2_fweqn"]
 [ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://assets/scenes/Player.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://assets/scenes/HUD.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://lr4ehat4x43v" path="res://art/background_biger.png" id="4_6sh37"]
@@ -21,7 +21,7 @@ point_count = 5
 script = ExtResource("1")
 background = NodePath("Background")
 layers = [NodePath("Layers/Layer"), NodePath("Layers/Layer_swap_x"), NodePath("Layers/Layer_swap_xy")]
-mob_scene = ExtResource("2")
+enemy_proj_scene = ExtResource("2_fweqn")
 
 [node name="HUD" parent="." node_paths=PackedStringArray("HealthBar", "ManaBar") instance=ExtResource("4")]
 HealthBar = NodePath("HealthBar")

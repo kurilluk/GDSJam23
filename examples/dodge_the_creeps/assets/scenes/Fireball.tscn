@@ -19,26 +19,26 @@ max_value = 360.0
 _data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_t421w"]
+[sub_resource type="CurveTexture" id="CurveTexture_74sp3"]
 curve = SubResource("Curve_mie81")
 
 [sub_resource type="Gradient" id="Gradient_a2qca"]
-colors = PackedColorArray(0.223529, 0.223529, 0.223529, 0.87451, 0.564706, 0.564706, 0.564706, 0.843137)
+colors = PackedColorArray(0.525101, 0.525101, 0.525101, 0.701961, 0.347817, 0.347817, 0.347817, 0.713726)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_74pm5"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tlm1j"]
 gradient = SubResource("Gradient_a2qca")
 
 [sub_resource type="Gradient" id="Gradient_k2x5t"]
-colors = PackedColorArray(0.593134, 0.593134, 0.593134, 0.67451, 0, 0, 0, 0)
+colors = PackedColorArray(0.733005, 0.733005, 0.733005, 0.67451, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_orafd"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_scgft"]
 gradient = SubResource("Gradient_k2x5t")
 
 [sub_resource type="Curve" id="Curve_rsu7f"]
 _data = [Vector2(0.0120482, 0.431579), 0.0, 0.0, 0, 0, Vector2(0.493976, 0.2), -1.27081, -1.27081, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="6"]
+[sub_resource type="CurveTexture" id="CurveTexture_3r76o"]
 curve = SubResource("Curve_rsu7f")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o6fmy"]
@@ -49,19 +49,19 @@ angular_velocity_min = -45.0
 angular_velocity_max = 45.0
 angle_min = -120.0
 angle_max = 120.0
-angle_curve = SubResource("CurveTexture_t421w")
+angle_curve = SubResource("CurveTexture_74sp3")
 scale_min = 0.8
 scale_max = 1.2
-scale_curve = SubResource("6")
-color_ramp = SubResource("GradientTexture1D_orafd")
-color_initial_ramp = SubResource("GradientTexture1D_74pm5")
+scale_curve = SubResource("CurveTexture_3r76o")
+color_ramp = SubResource("GradientTexture1D_scgft")
+color_initial_ramp = SubResource("GradientTexture1D_tlm1j")
 turbulence_enabled = true
 
-[sub_resource type="Gradient" id="Gradient_gesbe"]
+[sub_resource type="Gradient" id="Gradient_bl0sd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_230xt"]
-gradient = SubResource("Gradient_gesbe")
+gradient = SubResource("Gradient_bl0sd")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 

@@ -1,5 +1,5 @@
 extends RigidBody2D
-class_name Mob
+class_name EnemyProjectile
 
 func _ready():
 	$AnimatedSprite2D.play()
@@ -12,6 +12,9 @@ func _on_VisibilityNotifier2D_screen_exited():
 	
 func set_color(new_color):
 	$FireballBottom.self_modulate = new_color
-	
+
+func set_new_rotation(new_rot):
+	$FireballBottom.rotation = new_rot
+
 func die():
 	queue_free()

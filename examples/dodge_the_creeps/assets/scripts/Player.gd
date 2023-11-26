@@ -89,7 +89,9 @@ func handle_potion_inputs():
 				var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
 				potion_func.call()
 				
-func cast_magicks():
+func cast_magicks():	
+	$Fire_1.play()
+	
 	var player_dir = velocity.normalized()
 	if velocity.length() == 0:
 		player_dir = Vector2.UP

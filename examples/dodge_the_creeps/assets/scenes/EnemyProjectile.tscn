@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://rkdnhqgf2hpj"]
 
-[ext_resource type="Script" path="res://assets/scripts/Mob.gd" id="1_uleq4"]
+[ext_resource type="Script" path="res://assets/scripts/EnemyProjectile.gd" id="1_52uug"]
 [ext_resource type="Texture2D" uid="uid://ujab88aefoss" path="res://assets/sprites/projectiles/fireball_white_bottom.png" id="8_fl6st"]
 [ext_resource type="Texture2D" uid="uid://cda4ju411if4h" path="res://assets/sprites/projectiles/fireball_white_top.png" id="9_u15j2"]
 [ext_resource type="AudioStream" uid="uid://dfgfr12prj7tl" path="res://assets/sound/Fireball2.mp3" id="10_u304x"]
@@ -31,7 +31,7 @@ colors = PackedColorArray(0.733005, 0.733005, 0.733005, 0.67451, 0, 0, 0, 0)
 gradient = SubResource("Gradient_sfs6c")
 
 [sub_resource type="Curve" id="Curve_0t07f"]
-_data = [Vector2(0.0060241, 0.768421), 0.0, 0.0, 0, 0, Vector2(0.457831, 0.326316), -1.27081, -1.27081, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.536842), 0.0, 0.0, 0, 0, Vector2(0.457831, 0.326316), -1.27081, -1.27081, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="6"]
@@ -61,10 +61,10 @@ gradient = SubResource("Gradient_gesbe")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[node name="Mob" type="RigidBody2D" groups=["Projectile", "mobs"]]
+[node name="EnemyProjectile" type="RigidBody2D" groups=["Projectile", "mobs"]]
 collision_mask = 0
 gravity_scale = 0.0
-script = ExtResource("1_uleq4")
+script = ExtResource("1_52uug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -72,18 +72,10 @@ shape = SubResource("2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -40.0
-offset_top = -30.0
-offset_right = 40.0
-offset_bottom = 30.0
-color = Color(0.54902, 0.14902, 0.176471, 1)
-
 [node name="FireballBottom" type="Sprite2D" parent="."]
 self_modulate = Color(0.894118, 0.576471, 0.27451, 1)
 z_index = 2
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_fl6st")
 
 [node name="FireballTop" type="Sprite2D" parent="FireballBottom"]
@@ -92,7 +84,7 @@ texture = ExtResource("9_u15j2")
 
 [node name="Trail" type="GPUParticles2D" parent="FireballBottom"]
 z_index = -1
-amount = 40
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_xa45d")
 texture = SubResource("GradientTexture2D_854io")
 speed_scale = 2.0

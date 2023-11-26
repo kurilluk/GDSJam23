@@ -11,7 +11,7 @@ var on_death_callback: Callable
 var ignore_target
 	
 func _ready():
-	$Fire_1.play()
+	#$Fire_1.play()
 	random_curve_offset = randi_range(0, 1000)
 	fade_in(0.25, Callable(self, "enable_collider").bind(true))
 	

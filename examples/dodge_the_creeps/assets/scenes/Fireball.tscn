@@ -86,13 +86,14 @@ texture = ExtResource("3_hlxu0")
 
 [node name="Trail" type="GPUParticles2D" parent="FireballBottom"]
 z_index = -1
-amount = 40
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_o6fmy")
 texture = SubResource("GradientTexture2D_230xt")
+preprocess = 2.0
 speed_scale = 2.0
 randomness = 0.2
 
-[node name="Fire_1" type="AudioStreamPlayer2D" parent="."]
+[node name="Fire_1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_r4vrk")
 volume_db = -10.0
 

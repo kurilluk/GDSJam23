@@ -36,7 +36,7 @@ func new_game():
 	$HUD.show_message("Here they come!")
 	$HUD.show_hud_bars()
 	level = 1
-	pitch = 1.5
+	pitch = 1
 	set_new_layer(layers[0])
 
 func append_projectile(projectile):
@@ -89,14 +89,14 @@ func _on_MobTimer_timeout():
 	# Set the mob's position to a random location.
 		e_proj.position = e_projectile_spawn_location.position
 
-
 	# Choose the velocity for the mob.
-		var velocity = Vector2(randf_range(650.0, 850.0), 0.0)
-		e_proj.linear_velocity = velocity.rotated(direction)
+		var velocity = Vector2(randf_range(550.0, 800.0), 0.0)
 		
 	# Add some randomness to the direction.
-		direction += randf_range(-PI / 4, PI / 4)
-		e_proj.set_new_rotation(Vector2.UP.angle_to(velocity.normalized()))
+		direction += randf_range(-PI / 4.0, PI / 4.0)
+		e_proj.linear_velocity = velocity.rotated(direction)
+		
+		e_proj.set_new_rotation(Vector2.UP.angle_to(e_proj.linear_velocity.normalized()))
 	
 	
 		e_proj.set_color(current_layer.enemy_main_color)

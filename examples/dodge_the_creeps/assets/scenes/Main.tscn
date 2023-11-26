@@ -55,6 +55,12 @@ stream = ExtResource("6")
 [node name="Layer" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(1, 1, 1, 1)
 enemy_main_color = Color(0.305882, 0.568627, 0.788235, 1)
+potion_effects_modification = {
+"Potion_1": 0,
+"Potion_2": 1,
+"Potion_3": 3,
+"Potion_4": 2
+}
 
 [node name="Layer_swap_x" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.529412, 0.658824, 0.607843, 1)
@@ -73,6 +79,22 @@ potion_effects_modification = {
 }
 
 [node name="Layer_swap_xy" parent="Layers" instance=ExtResource("7_23b4r")]
+background_color = Color(0.701961, 0.6, 0.560784, 1)
+enemy_main_color = Color(0, 0.592157, 0.670588, 1)
+input_modification = {
+"Down": Vector2(0, -1),
+"Left": Vector2(1, 0),
+"Right": Vector2(-1, 0),
+"Up": Vector2(0, 1)
+}
+potion_effects_modification = {
+"Potion_1": 3,
+"Potion_2": 0,
+"Potion_3": 1,
+"Potion_4": 2
+}
+
+[node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.701961, 0.6, 0.560784, 1)
 enemy_main_color = Color(0, 0.592157, 0.670588, 1)
 input_modification = {

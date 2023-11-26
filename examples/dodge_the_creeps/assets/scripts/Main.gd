@@ -36,7 +36,7 @@ func new_game():
 	$HUD.show_message("Here they come!")
 	$HUD.show_hud_bars()
 	level = 1
-	pitch = 1
+	pitch = 1.5
 	set_new_layer(layers[0])
 
 func append_projectile(projectile):
@@ -52,6 +52,8 @@ func set_new_layer(layer: Layer):
 	$Music.pitch_scale = pitch
 	$Music.play()
 	pitch += 0.25
+	if pitch >= 2:
+		pitch = 1
 	
 	background.modulate = layer.background_color
 	$Player.set_player_inputs(layer.get_input_modification())

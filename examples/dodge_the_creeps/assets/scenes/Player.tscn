@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4vwrqjegqwpj"]
+[gd_scene load_steps=21 format=3 uid="uid://4vwrqjegqwpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/Player.gd" id="1_xm0s2"]
 [ext_resource type="Texture2D" uid="uid://ftkxr8r4qghp" path="res://art/playerGrey_walk1.png" id="2_ngcnf"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://je8cjivjthak" path="res://art/G_mage/G_mage.png" id="7_jf8c2"]
 [ext_resource type="AudioStream" uid="uid://dvi3scw7fgwmj" path="res://assets/sound/Fireball3.mp3" id="8_dtgvq"]
 [ext_resource type="AudioStream" uid="uid://d1cisdls5cyyn" path="res://assets/sound/Vocal_Ineedapotion_lowhp.mp3" id="8_ieq6g"]
+[ext_resource type="AudioStream" uid="uid://iy1ta5mbu2t1" path="res://assets/sound/Healing_potion.mp3" id="9_k5rw0"]
+[ext_resource type="AudioStream" uid="uid://5ia8eybkn3ya" path="res://assets/sound/Healingdrain_potion.mp3" id="10_7kduq"]
+[ext_resource type="AudioStream" uid="uid://d324dl36pt0fs" path="res://assets/sound/Manadrain_potion.mp3" id="11_kdwm7"]
+[ext_resource type="AudioStream" uid="uid://drj07yj5x5rw3" path="res://assets/sound/Mana_potion.mp3" id="12_kixw6"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -100,5 +104,17 @@ stream = ExtResource("8_ieq6g")
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_dtgvq")
 volume_db = -10.0
+
+[node name="S_HealPotion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_k5rw0")
+
+[node name="S_HealPotionDrain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_7kduq")
+
+[node name="S_ManaPotionDrain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_kdwm7")
+
+[node name="S_ManaPotion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_kixw6")
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

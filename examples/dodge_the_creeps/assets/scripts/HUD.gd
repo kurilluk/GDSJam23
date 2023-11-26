@@ -112,6 +112,7 @@ func update_score(score):
 
 func _on_StartButton_pressed():
 	$StartButton.hide()
+	$Play.play()
 	start_game.emit()
 	set_hud_bars()
 

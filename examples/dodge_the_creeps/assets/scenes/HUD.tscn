@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=12 format=3 uid="uid://ccqoreueuxdb7"]
 
 [ext_resource type="Script" path="res://assets/scripts/HUD.gd" id="1_8bs4p"]
 [ext_resource type="Texture2D" uid="uid://b2w0n7vs40ktk" path="res://assets/sprites/hud_bars/bottom.png" id="2_jl3v8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://rh3sxam8isjm" path="res://assets/sprites/hud_bars/texture.png" id="4_2hixl"]
 [ext_resource type="Texture2D" uid="uid://cp35k30xc2faq" path="res://art/HUB.png" id="5_jwupg"]
 [ext_resource type="PackedScene" uid="uid://c00egfmkn80e6" path="res://assets/scenes/Potions.tscn" id="5_kv5n5"]
+[ext_resource type="AudioStream" uid="uid://c32f3oisqirbn" path="res://assets/sound/Startgame.mp3" id="7_5cjpo"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
 action = &"start_game"
@@ -166,6 +167,9 @@ texture = ExtResource("5_jwupg")
 [node name="Potions" parent="." instance=ExtResource("5_kv5n5")]
 position = Vector2(767.5, 931)
 scale = Vector2(0.5, 0.5)
+
+[node name="Play" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_5cjpo")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

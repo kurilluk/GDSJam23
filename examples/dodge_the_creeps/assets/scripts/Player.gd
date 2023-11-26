@@ -155,6 +155,7 @@ func check_player_health():
 func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
 	hit.emit()
+	$HitSound.play()
 	#temp	
 	Game_HUD.update_health(health, health - 15)
 	health -= 15

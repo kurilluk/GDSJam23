@@ -20,12 +20,14 @@ bg_color = Color(0.858824, 0, 0.184314, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp17v"]
 bg_color = Color(0.0352941, 0.517647, 0.85098, 1)
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "UnderlyingHealthBar", "ManaBar", "UnderlyingManaBar", "ColorFadeRect")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "UnderlyingHealthBar", "ManaBar", "UnderlyingManaBar", "HudFrame", "PotionsScene", "ColorFadeRect")]
 script = ExtResource("1_8bs4p")
 HealthBar = NodePath("HealthBar_simple")
 UnderlyingHealthBar = NodePath("UnderlyingHealthBar")
 ManaBar = NodePath("ManaBar_simple")
 UnderlyingManaBar = NodePath("UnderlyingManaBar")
+HudFrame = NodePath("HubFrame")
+PotionsScene = NodePath("Potions")
 ColorFadeRect = NodePath("ColorFade")
 
 [node name="ScoreLabel" type="Label" parent="."]
@@ -151,7 +153,6 @@ tint_under = Color(0.207843, 0.207843, 0.207843, 1)
 tint_progress = Color(0.0509804, 0.152941, 0.317647, 0.768627)
 
 [node name="ColorFade" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 z_index = 999
 offset_left = -51.0
@@ -160,7 +161,7 @@ offset_right = 2093.0
 offset_bottom = 1314.0
 mouse_filter = 2
 
-[node name="Hub" type="Sprite2D" parent="."]
+[node name="HubFrame" type="Sprite2D" parent="."]
 position = Vector2(940, 975)
 texture = ExtResource("5_jwupg")
 

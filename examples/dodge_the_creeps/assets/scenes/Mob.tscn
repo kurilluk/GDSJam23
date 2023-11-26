@@ -88,5 +88,6 @@ texture = ExtResource("9_upgwi")
 
 [node name="Fire_2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_bd7a6")
+volume_db = -15.0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

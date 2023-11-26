@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=10 format=3 uid="uid://ccqoreueuxdb7"]
 
 [ext_resource type="Script" path="res://assets/scripts/HUD.gd" id="1_8bs4p"]
 [ext_resource type="Texture2D" uid="uid://b2w0n7vs40ktk" path="res://assets/sprites/hud_bars/bottom.png" id="2_jl3v8"]
 [ext_resource type="Texture2D" uid="uid://dxfq2x57j2vm" path="res://assets/sprites/hud_bars/top_new.png" id="3_4bm3m"]
 [ext_resource type="Texture2D" uid="uid://rh3sxam8isjm" path="res://assets/sprites/hud_bars/texture.png" id="4_2hixl"]
+[ext_resource type="PackedScene" uid="uid://c00egfmkn80e6" path="res://assets/scenes/Potions.tscn" id="5_kv5n5"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
 action = &"start_game"
@@ -57,9 +58,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -90.0
-offset_top = -200.0
+offset_top = -584.0
 offset_right = 90.0
-offset_bottom = -100.0
+offset_bottom = -484.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
@@ -97,23 +98,23 @@ show_percentage = false
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 z_index = 10
-offset_left = 167.0
+offset_left = 494.0
 offset_top = 837.0
-offset_right = 334.0
-offset_bottom = 1009.0
+offset_right = 659.0
+offset_bottom = 1003.0
 value = 100.0
 fill_mode = 3
 texture_under = ExtResource("2_jl3v8")
 texture_over = ExtResource("3_4bm3m")
 texture_progress = ExtResource("4_2hixl")
 tint_under = Color(0.207843, 0.207843, 0.207843, 1)
-tint_progress = Color(0.439216, 0.00784314, 0.0627451, 1)
+tint_progress = Color(0.52549, 0.0509804, 0.0509804, 1)
 
 [node name="UnderlyingHealthBar" type="TextureProgressBar" parent="."]
 z_index = 9
-offset_left = 167.0
+offset_left = 494.0
 offset_top = 837.0
-offset_right = 334.0
+offset_right = 661.0
 offset_bottom = 1009.0
 value = 100.0
 fill_mode = 3
@@ -123,9 +124,9 @@ tint_progress = Color(0.882353, 0, 0.0196078, 0.768627)
 
 [node name="ManaBar" type="TextureProgressBar" parent="."]
 z_index = 10
-offset_left = 1647.0
+offset_left = 1209.0
 offset_top = 831.0
-offset_right = 1814.0
+offset_right = 1376.0
 offset_bottom = 1003.0
 value = 100.0
 fill_mode = 3
@@ -136,9 +137,9 @@ tint_under = Color(0.207843, 0.207843, 0.207843, 1)
 tint_progress = Color(0.0784314, 0.203922, 0.411765, 1)
 
 [node name="UnderlyingManaBar" type="TextureProgressBar" parent="."]
-offset_left = 1647.0
+offset_left = 1209.0
 offset_top = 831.0
-offset_right = 1814.0
+offset_right = 1376.0
 offset_bottom = 1003.0
 value = 100.0
 fill_mode = 3
@@ -154,6 +155,10 @@ offset_top = -93.0
 offset_right = 2045.0
 offset_bottom = 1185.0
 mouse_filter = 2
+
+[node name="Potions" parent="." instance=ExtResource("5_kv5n5")]
+position = Vector2(753, 900)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

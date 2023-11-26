@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://da54cmhq2t3to"]
+[gd_scene load_steps=3 format=3 uid="uid://da54cmhq2t3to"]
 
 [ext_resource type="Script" path="res://assets/scripts/Layer.gd" id="1_o41cq"]
+[ext_resource type="Texture2D" uid="uid://cwakwa3m62x4c" path="res://art/background_map.png" id="2_r1616"]
 
 [node name="Layer" type="Node2D"]
 script = ExtResource("1_o41cq")
 background_color = Color(0.196078, 0.521569, 0.392157, 1)
 enemy_main_color = Color(0.443137, 0.137255, 0.0941176, 1)
+
+[node name="BackgroundMap" type="Sprite2D" parent="."]
+position = Vector2(963, 539)
+texture = ExtResource("2_r1616")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://c00egfmkn80e6"]
+
+[ext_resource type="Texture2D" uid="uid://y2syhx8hsbfs" path="res://art/Potions/G_Bottle Outline.png" id="1_iaqy1"]
+[ext_resource type="Texture2D" uid="uid://5jovxgrub0tr" path="res://art/Potions/G_Bottle Fill.png" id="2_n3628"]
+[ext_resource type="Texture2D" uid="uid://dvvvc2lg0qnjt" path="res://art/Potions/P-Bottle Outline.png" id="3_0x0k1"]
+[ext_resource type="Texture2D" uid="uid://b0qx28wx5ojek" path="res://art/Potions/P-Bottle Fill.png" id="4_q1kli"]
+[ext_resource type="Texture2D" uid="uid://dipfingxvcxf6" path="res://art/Potions/R_Bottle Outline.png" id="5_kc8tc"]
+[ext_resource type="Texture2D" uid="uid://y0gvmhllote8" path="res://art/Potions/R_Bottle Fill.png" id="6_johdg"]
+[ext_resource type="Texture2D" uid="uid://cnfssqw3dcxie" path="res://art/Potions/Y_Bottle Outline.png" id="7_6ygc5"]
+[ext_resource type="Texture2D" uid="uid://bclnwi03s3y6v" path="res://art/Potions/Y_Bottle Fill.png" id="8_lc7r8"]
+
+[node name="Potions" type="Node2D"]
+
+[node name="G_Bottle" type="TextureProgressBar" parent="."]
+offset_left = 200.0
+offset_right = 400.0
+offset_bottom = 200.0
+value = 100.0
+fill_mode = 3
+texture_over = ExtResource("1_iaqy1")
+texture_progress = ExtResource("2_n3628")
+
+[node name="P_Bottle" type="TextureProgressBar" parent="."]
+offset_left = 568.0
+offset_right = 768.0
+offset_bottom = 200.0
+value = 100.0
+fill_mode = 3
+texture_over = ExtResource("3_0x0k1")
+texture_progress = ExtResource("4_q1kli")
+
+[node name="R_Bottle" type="TextureProgressBar" parent="."]
+offset_right = 200.0
+offset_bottom = 200.0
+value = 100.0
+fill_mode = 3
+texture_over = ExtResource("5_kc8tc")
+texture_progress = ExtResource("6_johdg")
+
+[node name="Y_Bottle" type="TextureProgressBar" parent="."]
+offset_left = 400.0
+offset_right = 600.0
+offset_bottom = 200.0
+value = 100.0
+fill_mode = 3
+texture_over = ExtResource("7_6ygc5")
+texture_progress = ExtResource("8_lc7r8")

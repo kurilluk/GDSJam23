@@ -101,10 +101,10 @@ func cast_magicks():
 		
 		var rot = Vector2.UP.angle_to(dir)
 		fireball.set_rot(rot)
-		fireball.set_pos(position + (dir * 45))
+		fireball.set_pos(position + (dir * 10))
 		fireball.set_dir(dir)
 		fireball.set_color(Color.DARK_ORANGE)
-		fireball.set_speed(1000)
+		fireball.set_speed(800)
 		fireball.set_ignore_target("Player")
 		fireball.on_death_callback = projectile_erase
 		

@@ -16,6 +16,7 @@ class_name Layer
 # 1 - lose health
 # 2 - gain mana
 # 3 - lose mana
+
 @export var potion_effects_modification = {
 	"Potion_1": 0,
 	"Potion_2": 1,

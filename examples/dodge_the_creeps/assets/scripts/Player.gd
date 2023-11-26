@@ -11,8 +11,6 @@ signal hit
 
 @export var Fireball: PackedScene
 
-var magick_dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
-
 var health
 var mana
 var player_dead = true
@@ -92,13 +90,16 @@ func handle_potion_inputs():
 				potion_func.call()
 			
 func cast_magicks():
-	
-	for dir in magick_dirs:
+	var player_dir = velocity.normalized()
+	if velocity.length() == 0:
+		player_dir = Vector2.UP
+	var player_dir_perp = Vector2(-player_dir.y, player_dir.x)
+	var projectile_dirs = [player_dir, -1* player_dir, player_dir_perp, -1* player_dir_perp ]
+	for dir in projectile_dirs:
 		var fireball = Fireball.instantiate()
 		get_tree().root.get_node("Main").add_child(fireball)
-	
-		var rot = dir.x * PI/2 if dir.x != 0 else 0
-		rot = PI if dir.y > 0 else rot
+		
+		var rot = Vector2.UP.angle_to(dir)
 		fireball.set_rot(rot)
 		fireball.set_pos(position + (dir * 45))
 		fireball.set_dir(dir)
@@ -106,7 +107,7 @@ func cast_magicks():
 		fireball.set_speed(1000)
 		fireball.set_ignore_target("Player")
 		fireball.on_death_callback = projectile_erase
-	
+		
 		projectile_append.bind(fireball).call()
 	
 	
@@ -160,7 +161,7 @@ func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
 	hit.emit()
 	$HitSound.play()
-	#temp	
+	#temp
 	Game_HUD.update_health(health, health - 15)
 	health -= 15
 	get_viewport().get_camera_2d().camera_shake(5)
@@ -171,8 +172,7 @@ func _on_Player_body_entered(_body):
 
 func _on_cast_magick_timer_timeout():
 	if mana >= MAGICKS_MANA_COST:
-		cast_magicks()
-		
+		cast_magicks()		
 		#spend mana
 		var new_mana = clamp(mana - MAGICKS_MANA_COST, 0, PLAYER_MAX_MANA)
 		Game_HUD.update_mana(mana, new_mana);

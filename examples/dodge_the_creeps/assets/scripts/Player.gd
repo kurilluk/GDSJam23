@@ -165,13 +165,15 @@ func check_player_health():
 
 func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
-	hit.emit()
-	$HitSound.play()
+	if _body.is_in_group("Projectile"):
+		_body.destroy_self()
+		hit.emit()
+		$HitSound.play()
 	#temp
-	Game_HUD.update_health(health, health - 15)
-	health -= 15
-	get_viewport().get_camera_2d().camera_shake(5)
-	check_player_health()
+		Game_HUD.update_health(health, health - 15)
+		health -= 15
+		get_viewport().get_camera_2d().camera_shake(5)
+		check_player_health()
 	# Must be deferred as we can't change physics properties on a physics callback.
 #	$CollisionShape2D.set_deferred(&"disabled", true)
 

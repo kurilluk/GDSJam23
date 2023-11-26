@@ -95,12 +95,12 @@ potion_effects_modification = {
 }
 
 [node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
-background_color = Color(0.701961, 0.6, 0.560784, 1)
-enemy_main_color = Color(0, 0.592157, 0.670588, 1)
+background_color = Color(0.682353, 0.568627, 0.788235, 1)
+enemy_main_color = Color(0.576471, 0.643137, 0.32549, 1)
 input_modification = {
 "Down": Vector2(0, -1),
-"Left": Vector2(1, 0),
-"Right": Vector2(-1, 0),
+"Left": Vector2(-1, 0),
+"Right": Vector2(1, 0),
 "Up": Vector2(0, 1)
 }
 potion_effects_modification = {

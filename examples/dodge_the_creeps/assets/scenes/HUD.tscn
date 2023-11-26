@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=10 format=3 uid="uid://ccqoreueuxdb7"]
 
 [ext_resource type="Script" path="res://assets/scripts/HUD.gd" id="1_8bs4p"]
 [ext_resource type="Texture2D" uid="uid://b2w0n7vs40ktk" path="res://assets/sprites/hud_bars/bottom.png" id="2_jl3v8"]
@@ -14,17 +14,9 @@ action = &"start_game"
 [sub_resource type="Shortcut" id="4"]
 events = [SubResource("InputEventAction_fopy7")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcm0f"]
-bg_color = Color(0.858824, 0, 0.184314, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lp17v"]
-bg_color = Color(0.0352941, 0.517647, 0.85098, 1)
-
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "UnderlyingHealthBar", "ManaBar", "UnderlyingManaBar", "HudFrame", "PotionsScene", "ColorFadeRect")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("UnderlyingHealthBar", "UnderlyingManaBar", "HudFrame", "PotionsScene", "ColorFadeRect")]
 script = ExtResource("1_8bs4p")
-HealthBar = NodePath("HealthBar_simple")
 UnderlyingHealthBar = NodePath("UnderlyingHealthBar")
-ManaBar = NodePath("ManaBar_simple")
 UnderlyingManaBar = NodePath("UnderlyingManaBar")
 HudFrame = NodePath("HubFrame")
 PotionsScene = NodePath("Potions")
@@ -73,32 +65,6 @@ text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="HealthBar_simple" type="ProgressBar" parent="."]
-visible = false
-z_index = 10
-offset_left = 122.0
-offset_top = 1004.0
-offset_right = 372.0
-offset_bottom = 1074.0
-rotation = -1.57001
-theme_override_styles/fill = SubResource("StyleBoxFlat_dcm0f")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="ManaBar_simple" type="ProgressBar" parent="."]
-visible = false
-z_index = 10
-offset_left = 1742.0
-offset_top = 1004.0
-offset_right = 1992.0
-offset_bottom = 1074.0
-rotation = -1.57001
-theme_override_styles/fill = SubResource("StyleBoxFlat_lp17v")
-step = 1.0
-value = 100.0
-show_percentage = false
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 z_index = 10

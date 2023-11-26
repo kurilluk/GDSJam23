@@ -27,19 +27,6 @@ mob_scene = ExtResource("2")
 HealthBar = NodePath("HealthBar")
 ManaBar = NodePath("ManaBar")
 
-[node name="ScoreLabel" parent="HUD" index="0"]
-visible = false
-
-[node name="Background_old" type="ColorRect" parent="."]
-visible = false
-z_index = -100
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.407843, 0.301961, 0.4, 1)
-
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(961, 542.5)
 scale = Vector2(0.997917, 1.00648)
@@ -127,5 +114,3 @@ script = ExtResource("8_3uva2")
 [connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="Timers/LayerSwitchTimer" to="." method="_on_layer_switch_timer_timeout"]
 [connection signal="timeout" from="Timers/CastMagickTimer" to="Player" method="_on_cast_magick_timer_timeout"]
-
-[editable path="HUD"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c00egfmkn80e6"]
+[gd_scene load_steps=10 format=3 uid="uid://c00egfmkn80e6"]
 
+[ext_resource type="Script" path="res://assets/scripts/Potions.gd" id="1_8b8ln"]
 [ext_resource type="Texture2D" uid="uid://y2syhx8hsbfs" path="res://art/Potions/G_Bottle Outline.png" id="1_iaqy1"]
 [ext_resource type="Texture2D" uid="uid://5jovxgrub0tr" path="res://art/Potions/G_Bottle Fill.png" id="2_n3628"]
 [ext_resource type="Texture2D" uid="uid://dvvvc2lg0qnjt" path="res://art/Potions/P-Bottle Outline.png" id="3_0x0k1"]
@@ -9,12 +10,21 @@
 [ext_resource type="Texture2D" uid="uid://cnfssqw3dcxie" path="res://art/Potions/Y_Bottle Outline.png" id="7_6ygc5"]
 [ext_resource type="Texture2D" uid="uid://bclnwi03s3y6v" path="res://art/Potions/Y_Bottle Fill.png" id="8_lc7r8"]
 
-[node name="Potions" type="Node2D"]
+[node name="Potions" type="Node2D" node_paths=PackedStringArray("PotionBars")]
+script = ExtResource("1_8b8ln")
+PotionBars = [NodePath("R_Bottle"), NodePath("G_Bottle"), NodePath("Y_Bottle"), NodePath("P_Bottle")]
 
 [node name="G_Bottle" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = 200.0
 offset_right = 400.0
 offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
 value = 100.0
 fill_mode = 3
 texture_over = ExtResource("1_iaqy1")

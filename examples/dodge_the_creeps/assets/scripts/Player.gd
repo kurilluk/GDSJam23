@@ -2,11 +2,12 @@ extends Area2D
 
 signal hit
 
-@export var SPEED = 600 # How fast the player will move (pixels/sec).
+@export var SPEED = 500 # How fast the player will move (pixels/sec).
 @export var PLAYER_MAX_HEALTH = 100
 @export var PLAYER_MAX_MANA = 100
 @export var MAGICKS_MANA_COST = 10
 @export var Game_HUD: HUD
+@export var POTION_COOLDOWN = 1.0
 
 @export var Fireball: PackedScene
 
@@ -37,9 +38,9 @@ var potion_input_effects = {
 }
 
 var potion_effects = {
-	0: Callable(self, "potion_heal").bind(10),
+	0: Callable(self, "potion_heal").bind(15),
 	1: Callable(self, "potion_hurt").bind(10),
-	2: Callable(self, "potion_gain_mana").bind(10),
+	2: Callable(self, "potion_gain_mana").bind(15),
 	3: Callable(self, "potion_loose_mana").bind(10),
 }
 
@@ -69,9 +70,9 @@ func handle_movement(delta):
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 	if velocity.x > 0:
-		$Sprite2D.flip_h = true
-	elif velocity.x < 0:
 		$Sprite2D.flip_h = false
+	elif velocity.x < 0:
+		$Sprite2D.flip_h = true
 	#if velocity.x != 0:
 	#	$AnimatedSprite2D.animation = &"right"
 	#	$AnimatedSprite2D.flip_v = false
@@ -85,8 +86,10 @@ func handle_movement(delta):
 func handle_potion_inputs():
 	for potion_action in potion_input_effects:
 		if Input.is_action_just_pressed(potion_action):
-			var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
-			potion_func.call()
+			if Game_HUD.get_potion_ready(potion_action):
+				Game_HUD.use_potion(potion_action)
+				var potion_func: Callable = potion_effects[potion_input_effects[potion_action]]
+				potion_func.call()
 			
 func cast_magicks():
 	
@@ -119,6 +122,7 @@ func start(pos):
 	mana = PLAYER_MAX_MANA
 	player_dead = false
 	show()
+	Game_HUD.set_potion_cooldown(POTION_COOLDOWN)
 	$CollisionShape2D.disabled = false
 
 func potion_heal(value):
@@ -168,5 +172,10 @@ func _on_Player_body_entered(_body):
 func _on_cast_magick_timer_timeout():
 	if mana >= MAGICKS_MANA_COST:
 		cast_magicks()
-		potion_loose_mana(MAGICKS_MANA_COST)
+		
+		#spend mana
+		var new_mana = clamp(mana - MAGICKS_MANA_COST, 0, PLAYER_MAX_MANA)
+		Game_HUD.update_mana(mana, new_mana);
+		mana = new_mana
+		#
 		

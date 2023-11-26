@@ -87,6 +87,15 @@ func update_health(old_value, new_value):
 func update_mana(old_value, new_value):
 	update_bar(old_value, new_value, "Mana")
 
+func get_potion_ready(name):
+	return $Potions.is_potion_ready(name)
+
+func use_potion(name):
+	$Potions.use_potion(name)
+
+func set_potion_cooldown(value):
+	$Potions.potion_cooldown = value
+
 func show_game_over():
 	show_message("Game Over")
 	await $MessageTimer.timeout
@@ -114,7 +123,7 @@ func update_score(score):
 
 func _on_StartButton_pressed():
 	$StartButton.hide()
-	#$Play.play()
+	$Play.play()
 	start_game.emit()
 	set_hud_bars()
 

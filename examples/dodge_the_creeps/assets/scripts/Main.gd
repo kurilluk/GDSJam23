@@ -8,7 +8,8 @@ extends Node
 var score
 var current_layer
 var enemies: Array[Mob]
-var projectiles: Array[Fireball]
+var player_projectiles: Array[Fireball]
+var level = 0
 
 func _ready() -> void:
 	pass
@@ -36,13 +37,15 @@ func new_game():
 	set_new_layer(layers[0])
 
 func append_projectile(projectile):
-	projectiles.append(projectile)
+	player_projectiles.append(projectile)
 	
 func erase_projectile(projectile):
-	projectiles.erase(projectile)
+	player_projectiles.erase(projectile)
 	#$Music.play()
-func set_new_layer(layer: Layer):	
+func set_new_layer(layer: Layer):
 	current_layer = layer
+	level += 1
+	
 	background.modulate = layer.background_color
 	$Player.set_player_inputs(layer.get_input_modification())
 	$Player.set_potion_effects(layer.get_potion_modifications())
@@ -50,12 +53,16 @@ func set_new_layer(layer: Layer):
 	set_enemy_colors(layer.enemy_main_color)
 
 func set_enemy_colors(color):
+	var remove_last = []
 	for i in enemies.size():
 		var enemy = enemies[-i-1]
 		if enemy == null:
-			enemies.remove_at(-i-1)
+			remove_last.append(-i -1)
 			break
 		enemy.set_color(color)
+
+	for index in remove_last:
+		enemies.remove_at(index)
 
 func _on_MobTimer_timeout():
 	for i in enemy_spawn_amount:

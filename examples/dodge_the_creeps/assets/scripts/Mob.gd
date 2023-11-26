@@ -11,7 +11,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 	
 func set_color(new_color):
-	$ColorRect.color = new_color
+	$FireballBottom.self_modulate = new_color
 	
 func die():
 	queue_free()

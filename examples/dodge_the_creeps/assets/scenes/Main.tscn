@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://assets/scenes/Player.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://assets/scenes/HUD.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://lr4ehat4x43v" path="res://art/background_biger.png" id="4_6sh37"]
-[ext_resource type="AudioStream" uid="uid://q2pf4fr8d0ks" path="res://art/House In a Forest Loop.ogg" id="5"]
 [ext_resource type="PackedScene" uid="uid://ddifmu7obmqe2" path="res://assets/scenes/Fireball.tscn" id="5_h27ax"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6"]
 [ext_resource type="PackedScene" uid="uid://da54cmhq2t3to" path="res://assets/scenes/Layer.tscn" id="7_23b4r"]
+[ext_resource type="AudioStream" uid="uid://x4fnidkndycy" path="res://assets/sound/soundtrack1.mp3" id="7_u85tg"]
 [ext_resource type="Script" path="res://assets/scripts/Camera.gd" id="8_3uva2"]
 
 [sub_resource type="Curve2D" id="1"]
@@ -45,7 +45,7 @@ curve = SubResource("1")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5")
+stream = ExtResource("7_u85tg")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6")
@@ -53,11 +53,12 @@ stream = ExtResource("6")
 [node name="Layers" type="Node2D" parent="."]
 
 [node name="Layer" parent="Layers" instance=ExtResource("7_23b4r")]
-background_color = Color(0.407843, 0.301961, 0.4, 1)
-enemy_main_color = Color(0.54902, 0.14902, 0.176471, 1)
+background_color = Color(1, 1, 1, 1)
+enemy_main_color = Color(0.305882, 0.568627, 0.788235, 1)
 
 [node name="Layer_swap_x" parent="Layers" instance=ExtResource("7_23b4r")]
-enemy_main_color = Color(0.376471, 0.172549, 0.309804, 1)
+background_color = Color(0.529412, 0.658824, 0.607843, 1)
+enemy_main_color = Color(0.741176, 0, 0.870588, 1)
 input_modification = {
 "Down": Vector2(0, 1),
 "Left": Vector2(1, 0),
@@ -72,8 +73,8 @@ potion_effects_modification = {
 }
 
 [node name="Layer_swap_xy" parent="Layers" instance=ExtResource("7_23b4r")]
-background_color = Color(0.552941, 0.25098, 0.137255, 1)
-enemy_main_color = Color(0.0901961, 0.258824, 0.282353, 1)
+background_color = Color(0.701961, 0.6, 0.560784, 1)
+enemy_main_color = Color(0, 0.592157, 0.670588, 1)
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(1, 0),
@@ -109,6 +110,7 @@ script = ExtResource("8_3uva2")
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="on_death" from="Player" to="." method="game_over"]
+[connection signal="finished" from="Music" to="." method="_on_background_music_finished"]
 [connection signal="timeout" from="Timers/MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="Timers/ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]

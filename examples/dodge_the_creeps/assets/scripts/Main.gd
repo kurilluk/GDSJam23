@@ -10,6 +10,7 @@ var current_layer
 var enemies: Array[Mob]
 var player_projectiles: Array[Fireball]
 var level = 0
+var pitch = 1
 
 func _ready() -> void:
 	pass
@@ -34,6 +35,8 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.show_message("Here they come!")
 	$HUD.show_hud_bars()
+	level = 1
+	pitch = 1
 	set_new_layer(layers[0])
 
 func append_projectile(projectile):
@@ -45,6 +48,10 @@ func erase_projectile(projectile):
 func set_new_layer(layer: Layer):
 	current_layer = layer
 	level += 1
+	
+	$Music.pitch_scale = pitch
+	$Music.play()
+	pitch += 0.25
 	
 	background.modulate = layer.background_color
 	$Player.set_player_inputs(layer.get_input_modification())
@@ -103,7 +110,8 @@ func _on_StartTimer_timeout():
 	$Timers/LayerSwitchTimer.start()
 	
 func _on_layer_switch_timer_timeout():	
-	$HUD.fade_layer_switch(Callable(self, "set_new_layer_callback"))
+#	$HUD.fade_layer_switch(Callable(self, "set_new_layer_callback"))
+	pass
 	
 func set_new_layer_callback():
 	var new_layer = get_rand_layer()
@@ -115,4 +123,5 @@ func get_rand_layer():
 	var rand_layer = layers[randi() % layers.size()]
 	return rand_layer
 
-
+func _on_background_music_finished():
+	$HUD.fade_layer_switch(Callable(self, "set_new_layer_callback"))

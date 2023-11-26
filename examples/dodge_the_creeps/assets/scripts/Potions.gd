@@ -27,7 +27,7 @@ func use_potion(name):
 		
 	var potion_progress_bar = PotionBars[potion_index]
 	var value_tween = create_tween()
-	value_tween.tween_property(potion_progress_bar, "value", 0, potion_use_empty_dur).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	value_tween.tween_property(potion_progress_bar, "value", 50, potion_use_empty_dur).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	value_tween.tween_property(potion_progress_bar, "value", 100, potion_cooldown - potion_use_empty_dur) \
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	value_tween.tween_callback(Callable(self, "set_potion_ready").bind(potion_index))

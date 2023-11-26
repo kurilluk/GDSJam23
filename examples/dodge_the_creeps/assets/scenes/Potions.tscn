@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://assets/scripts/Potions.gd" id="1_8b8ln"]
 [ext_resource type="Texture2D" uid="uid://y2syhx8hsbfs" path="res://art/Potions/G_Bottle Outline.png" id="1_iaqy1"]
 [ext_resource type="Texture2D" uid="uid://5jovxgrub0tr" path="res://art/Potions/G_Bottle Fill.png" id="2_n3628"]
-[ext_resource type="Texture2D" uid="uid://dvvvc2lg0qnjt" path="res://art/Potions/P-Bottle Outline.png" id="3_0x0k1"]
-[ext_resource type="Texture2D" uid="uid://b0qx28wx5ojek" path="res://art/Potions/P-Bottle Fill.png" id="4_q1kli"]
+[ext_resource type="Texture2D" uid="uid://daffd2dp7q3r2" path="res://art/Potions/B-Bottle Outline.png" id="4_bdj8v"]
+[ext_resource type="Texture2D" uid="uid://dd0472r1ym0ud" path="res://art/Potions/B-Bottle Fill.png" id="5_ipvvf"]
 [ext_resource type="Texture2D" uid="uid://dipfingxvcxf6" path="res://art/Potions/R_Bottle Outline.png" id="5_kc8tc"]
 [ext_resource type="Texture2D" uid="uid://y0gvmhllote8" path="res://art/Potions/R_Bottle Fill.png" id="6_johdg"]
 [ext_resource type="Texture2D" uid="uid://cnfssqw3dcxie" path="res://art/Potions/Y_Bottle Outline.png" id="7_6ygc5"]
@@ -36,8 +36,8 @@ offset_right = 768.0
 offset_bottom = 200.0
 value = 100.0
 fill_mode = 3
-texture_over = ExtResource("3_0x0k1")
-texture_progress = ExtResource("4_q1kli")
+texture_over = ExtResource("4_bdj8v")
+texture_progress = ExtResource("5_ipvvf")
 
 [node name="R_Bottle" type="TextureProgressBar" parent="."]
 offset_right = 200.0

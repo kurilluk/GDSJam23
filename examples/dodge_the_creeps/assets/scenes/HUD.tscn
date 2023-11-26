@@ -125,10 +125,10 @@ tint_progress = Color(0.0509804, 0.152941, 0.317647, 0.768627)
 [node name="ColorFade" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = 999
-offset_left = -156.0
-offset_top = -152.0
-offset_right = 2106.0
-offset_bottom = 1247.0
+offset_left = 21.0
+offset_top = -5.0
+offset_right = 2283.0
+offset_bottom = 1394.0
 mouse_filter = 2
 
 [node name="HubFrame" type="Sprite2D" parent="."]
@@ -136,7 +136,7 @@ position = Vector2(940, 983)
 texture = ExtResource("5_jwupg")
 
 [node name="Potions" parent="." instance=ExtResource("5_kv5n5")]
-position = Vector2(754, 935)
+position = Vector2(753, 925)
 scale = Vector2(0.5, 0.5)
 
 [node name="Play" type="AudioStreamPlayer" parent="."]
@@ -146,23 +146,23 @@ stream = ExtResource("7_5cjpo")
 position = Vector2(-7, 8)
 
 [node name="1b" type="Sprite2D" parent="Buttons"]
-position = Vector2(810, 1040)
-scale = Vector2(0.5, 0.5)
+position = Vector2(809, 1040)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("8_vs5at")
 
 [node name="2a" type="Sprite2D" parent="Buttons"]
-position = Vector2(910, 1040)
-scale = Vector2(0.5, 0.5)
+position = Vector2(909, 1040)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("9_lsff2")
 
 [node name="3y" type="Sprite2D" parent="Buttons"]
-position = Vector2(1010, 1040)
-scale = Vector2(0.5, 0.5)
+position = Vector2(1009, 1040)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("10_px1d8")
 
 [node name="4x" type="Sprite2D" parent="Buttons"]
-position = Vector2(1095, 1040)
-scale = Vector2(0.5, 0.5)
+position = Vector2(1094, 1040)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("11_7mmmq")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

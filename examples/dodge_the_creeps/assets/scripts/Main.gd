@@ -60,7 +60,7 @@ func set_new_layer(layer: Layer):
 	$Player.set_potion_effects(layer.get_potion_modifications())
 	
 	set_enemy_colors(layer.enemy_main_color)
-
+	
 func set_enemy_colors(color):
 	var remove_last = []
 	for i in enemies.size():

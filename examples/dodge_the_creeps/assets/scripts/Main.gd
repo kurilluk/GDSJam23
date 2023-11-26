@@ -96,8 +96,7 @@ func _on_MobTimer_timeout():
 		direction += randf_range(-PI / 4.0, PI / 4.0)
 		e_proj.linear_velocity = velocity.rotated(direction)
 		
-		e_proj.set_new_rotation(Vector2.UP.angle_to(e_proj.linear_velocity.normalized()))
-	
+		e_proj.set_new_rotation(Vector2.UP.angle_to(e_proj.linear_velocity.normalized()))	
 	
 		e_proj.set_color(current_layer.enemy_main_color)
 		enemy_projectiles.append(e_proj)

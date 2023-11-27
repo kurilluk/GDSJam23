@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyfwty2q3rdse"]
+[gd_scene load_steps=13 format=3 uid="uid://cyfwty2q3rdse"]
 
 [ext_resource type="Script" path="res://assets/scripts/Main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://assets/scenes/EnemyProjectile.tscn" id="2_fweqn"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://x4fnidkndycy" path="res://assets/sound/soundtrack1.mp3" id="7_u85tg"]
 [ext_resource type="AudioStream" uid="uid://b005lep86v3yf" path="res://assets/sound/Gameover.mp3" id="8_3ml3g"]
 [ext_resource type="Script" path="res://assets/scripts/Camera.gd" id="8_3uva2"]
+[ext_resource type="AudioStream" uid="uid://cpysvr0bveyx" path="res://assets/sound/Vocal_Okay_Levelswitch.mp3" id="8_pd2ho"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -47,6 +48,10 @@ curve = SubResource("1")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_u85tg")
+
+[node name="Transition" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_pd2ho")
+volume_db = 5.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3ml3g")
@@ -96,8 +101,13 @@ potion_effects_modification = {
 }
 
 [node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
+<<<<<<< Updated upstream
 background_color = Color(0.682353, 0.568627, 0.788235, 1)
 enemy_main_color = Color(0.596078, 0.639216, 0.294118, 1)
+=======
+background_color = Color(0.72549, 0.623529, 0.819608, 1)
+enemy_main_color = Color(0.745098, 0.870588, 0.286275, 1)
+>>>>>>> Stashed changes
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(-1, 0),
@@ -134,6 +144,7 @@ script = ExtResource("8_3uva2")
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="on_death" from="Player" to="." method="game_over"]
 [connection signal="finished" from="Music" to="." method="_on_background_music_finished"]
+[connection signal="finished" from="Transition" to="." method="_on_background_music_finished"]
 [connection signal="timeout" from="Timers/MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="Timers/ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]

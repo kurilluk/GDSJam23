@@ -96,22 +96,26 @@ stream = ExtResource("8_ieq6g")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_dtgvq")
-volume_db = -10.0
+volume_db = -5.0
 
 [node name="Fire_1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_55jwn")
-volume_db = -10.0
+volume_db = -15.0
 
 [node name="S_HealPotion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_p4aha")
+volume_db = 5.0
 
 [node name="S_ManaPotion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_t44o3")
+volume_db = 5.0
 
 [node name="S_HealPotionDrain" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_j8lnq")
+stream = ExtResource("13_1pnjb")
+volume_db = 8.0
 
 [node name="S_ManaPotionDrain" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_1pnjb")
+stream = ExtResource("12_j8lnq")
+volume_db = 8.0
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

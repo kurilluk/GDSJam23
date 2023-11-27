@@ -131,3 +131,5 @@ func get_rand_layer():
 
 func _on_background_music_finished():
 	$HUD.fade_layer_switch(Callable(self, "set_new_layer_callback"))
+#	$Transition.play()
+	

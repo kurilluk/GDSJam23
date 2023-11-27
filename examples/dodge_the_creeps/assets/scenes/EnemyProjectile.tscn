@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://rkdnhqgf2hpj"]
+[gd_scene load_steps=16 format=3 uid="uid://rkdnhqgf2hpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/EnemyProjectile.gd" id="1_52uug"]
 [ext_resource type="PackedScene" uid="uid://ba8s1st1lqc5e" path="res://assets/scenes/Explosion.tscn" id="2_03v0x"]
@@ -10,29 +10,20 @@
 radius = 45.0
 height = 90.0
 
-[sub_resource type="Curve" id="Curve_7igsd"]
-min_value = -360.0
-max_value = 360.0
-_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_t421w"]
-curve = SubResource("Curve_7igsd")
-
-[sub_resource type="Gradient" id="Gradient_peqr8"]
+[sub_resource type="Gradient" id="Gradient_a2qca"]
 colors = PackedColorArray(0.525101, 0.525101, 0.525101, 0.701961, 0.347817, 0.347817, 0.347817, 0.713726)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_74pm5"]
-gradient = SubResource("Gradient_peqr8")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tlm1j"]
+gradient = SubResource("Gradient_a2qca")
 
-[sub_resource type="Gradient" id="Gradient_sfs6c"]
+[sub_resource type="Gradient" id="Gradient_k2x5t"]
 colors = PackedColorArray(0.733005, 0.733005, 0.733005, 0.67451, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_orafd"]
-gradient = SubResource("Gradient_sfs6c")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_scgft"]
+gradient = SubResource("Gradient_k2x5t")
 
 [sub_resource type="Curve" id="Curve_0t07f"]
-_data = [Vector2(0, 0.536842), 0.0, 0.0, 0, 0, Vector2(0.457831, 0.326316), -1.27081, -1.27081, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.536842), 0.0, 0.0, 0, 0, Vector2(0.46988, 0.178947), -0.582456, -0.582456, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="6"]
@@ -42,17 +33,11 @@ curve = SubResource("Curve_0t07f")
 lifetime_randomness = 0.05
 direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 0, 0)
-angular_velocity_min = -45.0
-angular_velocity_max = 45.0
-angle_min = -120.0
-angle_max = 120.0
-angle_curve = SubResource("CurveTexture_t421w")
 scale_min = 0.8
 scale_max = 1.2
 scale_curve = SubResource("6")
-color_ramp = SubResource("GradientTexture1D_orafd")
-color_initial_ramp = SubResource("GradientTexture1D_74pm5")
-turbulence_enabled = true
+color_ramp = SubResource("GradientTexture1D_scgft")
+color_initial_ramp = SubResource("GradientTexture1D_tlm1j")
 
 [sub_resource type="Gradient" id="Gradient_gesbe"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -89,8 +74,10 @@ z_index = -1
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_xa45d")
 texture = SubResource("GradientTexture2D_854io")
+lifetime = 0.6
 speed_scale = 2.0
 randomness = 0.2
+fract_delta = false
 
 [node name="Fire_2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_u304x")

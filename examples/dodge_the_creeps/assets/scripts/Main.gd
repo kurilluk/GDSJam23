@@ -54,8 +54,8 @@ func set_new_layer(layer: Layer):
 	$Music.pitch_scale = pitch
 	$Music.play()
 	pitch += 0.25
-	if pitch >= 2.5:
-		pitch = 1
+	if pitch >= 3.0:
+		pitch = 3.0
 	
 	background.modulate = layer.background_color
 	$Player.set_player_inputs(layer.get_input_modification())
@@ -95,7 +95,7 @@ func _on_MobTimer_timeout():
 		var velocity = Vector2(randf_range(550.0, 800.0), 0.0)
 		
 	# Add some randomness to the direction.
-		direction += randf_range(-PI / 4.0, PI / 4.0)
+		direction += randf_range(-PI / 16.0, PI / 16.0)
 		e_proj.linear_velocity = velocity.rotated(direction)
 		
 		e_proj.set_new_rotation(Vector2.UP.angle_to(e_proj.linear_velocity.normalized()))	

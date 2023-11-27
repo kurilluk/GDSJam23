@@ -3,12 +3,15 @@ class_name EnemyProjectile
 
 @export var ExplosionEffect: PackedScene
 
+var destroyed = false
+
 func _ready():
 	$Fire_2.play()
 	fade_in(0.5, Callable())
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	if not destroyed: #deletion handled by script
+		queue_free()
 	
 func set_color(new_color):
 	$FireballBottom.self_modulate = new_color
@@ -35,7 +38,8 @@ func fade_out(fade_dur, duration_to_callback, callback: Callable):
 	fade_tweener.tween_callback(callback)
 	
 func enable_collider(value):
-	$CollisionShape2D.disabled = !value
+	#$CollisionShape2D.disabled = !value
+	$CollisionShape2D.disabled = true
 
 func explosion_effect():
 	var exp_inst = ExplosionEffect.instantiate()
@@ -43,8 +47,15 @@ func explosion_effect():
 	exp_inst.set_new_color($FireballBottom.self_modulate)
 	exp_inst.position = self.position
 
-func destroy_self():
+func handle_object_destroy():
+	destroyed = true
+	self.linear_velocity = Vector2.ZERO
+	#idk why collider is still active
+	$CollisionShape2D.position = Vector2(10000, 10000)
+	
+func destroy_self():	
 	enable_collider(false)
 	$FireballBottom/Trail.emitting = false
 	explosion_effect()
-	fade_out(0.1, 1.0, Callable(self, "queue_free"))
+	handle_object_destroy()
+	fade_out(0.1, 0.6, Callable(self, "queue_free"))

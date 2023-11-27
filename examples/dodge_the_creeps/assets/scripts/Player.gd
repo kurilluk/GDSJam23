@@ -176,8 +176,8 @@ func _on_Player_body_entered(_body):
 		hit.emit()
 		$HitSound.play()
 	#temp
-		Game_HUD.update_health(health, health - 10)
-		health -= 10
+		Game_HUD.update_health(health, health - 20)
+		health -= 20
 		get_viewport().get_camera_2d().camera_shake(5)
 		check_player_health()
 	# Must be deferred as we can't change physics properties on a physics callback.

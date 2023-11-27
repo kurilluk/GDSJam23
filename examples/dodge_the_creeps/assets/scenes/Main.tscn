@@ -34,6 +34,7 @@ texture = ExtResource("4_6sh37")
 
 [node name="Player" parent="." node_paths=PackedStringArray("Game_HUD") instance=ExtResource("3")]
 Game_HUD = NodePath("../HUD")
+POTION_COOLDOWN = 0.5
 Fireball = ExtResource("5_h27ax")
 
 [node name="StartPosition" type="Marker2D" parent="."]
@@ -54,7 +55,7 @@ stream = ExtResource("8_3ml3g")
 
 [node name="Layer" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(1, 1, 1, 1)
-enemy_main_color = Color(0.305882, 0.568627, 0.788235, 1)
+enemy_main_color = Color(0.305882, 0.568627, 0.796078, 1)
 potion_effects_modification = {
 "Potion_1": 0,
 "Potion_2": 1,
@@ -80,7 +81,7 @@ potion_effects_modification = {
 
 [node name="Layer_swap_xy" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.701961, 0.6, 0.560784, 1)
-enemy_main_color = Color(0, 0.592157, 0.670588, 1)
+enemy_main_color = Color(0.254902, 0.607843, 0.403922, 1)
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(1, 0),
@@ -90,13 +91,13 @@ input_modification = {
 potion_effects_modification = {
 "Potion_1": 3,
 "Potion_2": 0,
-"Potion_3": 1,
-"Potion_4": 2
+"Potion_3": 2,
+"Potion_4": 1
 }
 
 [node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.682353, 0.568627, 0.788235, 1)
-enemy_main_color = Color(0.576471, 0.643137, 0.32549, 1)
+enemy_main_color = Color(0.596078, 0.639216, 0.294118, 1)
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(-1, 0),
@@ -106,7 +107,7 @@ input_modification = {
 potion_effects_modification = {
 "Potion_1": 1,
 "Potion_2": 3,
-"Potion_3": 4,
+"Potion_3": 2,
 "Potion_4": 0
 }
 

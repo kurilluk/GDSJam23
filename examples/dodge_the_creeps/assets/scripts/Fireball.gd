@@ -10,6 +10,7 @@ var speed: int
 var direction: Vector2
 var on_death_callback: Callable
 var ignore_target
+
 	
 func _ready():
 	#$Fire_1.play()
@@ -73,8 +74,7 @@ func _on_screen_exited():
 	pass # Replace with function body.
 	
 func destroy_self():
-	fade_out(0.1, 1.0, Callable(self, "queue_free"))
-	explosion_effect()
+	fade_out(0.1, 1.0, Callable(self, "queue_free"))	
 	on_death_callback.bind(self).call()
 
 func explosion_effect():
@@ -88,12 +88,14 @@ func _on_body_entered(body):
 		pass # Replace with function body.
 	if body.is_in_group("Projectile"):
 		destroy_self()
+		explosion_effect()
 		body.destroy_self()
 	
 func _on_area_entered(area):
 	if area.is_in_group("Player") and ignore_target != "Player":
 		destroy_self()
 	if area.is_in_group("Projectile"):
+		explosion_effect()
 		destroy_self()
 	pass # Replace with function body.
 	

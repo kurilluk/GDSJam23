@@ -6,6 +6,7 @@ signal hit
 @export var PLAYER_MAX_HEALTH = 100
 @export var PLAYER_MAX_MANA = 100
 @export var MAGICKS_MANA_COST = 10
+@export var FIREBALL_SPEED = 800
 @export var Game_HUD: HUD
 @export var POTION_COOLDOWN = 1.0
 
@@ -97,11 +98,11 @@ func player_hurt_effect():
 func cast_magicks():	
 	$Fire_1.play()
 	
-	var player_dir = velocity.normalized()
-	if velocity.length() == 0:
-		player_dir = Vector2.UP
+	var player_dir = velocity.normalized() if velocity.length() != 0 else Vector2.UP
+	
 	var player_dir_perp = Vector2(-player_dir.y, player_dir.x)
-	var projectile_dirs = [player_dir, -1* player_dir, player_dir_perp, -1* player_dir_perp ]
+	var projectile_dirs = [player_dir, -1* player_dir, player_dir_perp, -1* player_dir_perp]
+	
 	for dir in projectile_dirs:
 		var fireball = Fireball.instantiate()
 		get_tree().root.get_node("Main").add_child(fireball)
@@ -111,7 +112,7 @@ func cast_magicks():
 		fireball.set_pos(position + (dir * 10))
 		fireball.set_dir(dir)
 		fireball.set_color(Color.DARK_ORANGE)
-		fireball.set_speed(800)
+		fireball.set_speed(FIREBALL_SPEED)
 		fireball.set_ignore_target("Player")
 		fireball.on_death_callback = projectile_erase
 		
@@ -170,7 +171,7 @@ func check_player_health():
 
 func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
-	if _body.is_in_group("Projectile"):
+	if _body.is_in_group("Projectile") and not _body.destroyed:
 		player_hurt_effect()
 		_body.destroy_self()
 		hit.emit()

@@ -2,12 +2,21 @@ extends RigidBody2D
 class_name EnemyProjectile
 
 @export var ExplosionEffect: PackedScene
+@export var intensity_curve: Curve
+@export var intensity_curve_scale = 2
+var random_curve_offset: int
 
 var destroyed = false
 
 func _ready():
 	$Fire_2.play()
+	random_curve_offset = randi_range(0, 1000)
 	fade_in(0.5, Callable())
+	
+func _process(delta):
+	var time = Time.get_ticks_msec()
+	var t = (((int(time * intensity_curve_scale) + random_curve_offset) % 1000) / 1000.0)
+	$FireballBottom.self_modulate = $FireballBottom.self_modulate * (1.0 + intensity_curve.sample(t))
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if not destroyed: #deletion handled by script
@@ -53,7 +62,7 @@ func handle_object_destroy():
 	#idk why collider is still active
 	$CollisionShape2D.position = Vector2(10000, 10000)
 	
-func destroy_self():	
+func destroy_self():
 	enable_collider(false)
 	$FireballBottom/Trail.emitting = false
 	explosion_effect()

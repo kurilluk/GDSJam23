@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://rkdnhqgf2hpj"]
+[gd_scene load_steps=11 format=3 uid="uid://rkdnhqgf2hpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/EnemyProjectile.gd" id="1_52uug"]
 [ext_resource type="PackedScene" uid="uid://ba8s1st1lqc5e" path="res://assets/scenes/Explosion.tscn" id="2_03v0x"]
+[ext_resource type="Curve" uid="uid://0jrp0f2i3810" path="res://assets/curves/Fireball_Intensity.tres" id="3_alofp"]
 [ext_resource type="Material" uid="uid://b6ukcccstmrxf" path="res://assets/materials/FireballTrail.tres" id="5_pklb8"]
 [ext_resource type="Texture2D" uid="uid://ujab88aefoss" path="res://assets/sprites/projectiles/fireball_white_bottom.png" id="8_fl6st"]
 [ext_resource type="Texture2D" uid="uid://cda4ju411if4h" path="res://assets/sprites/projectiles/fireball_white_top.png" id="9_u15j2"]
@@ -24,6 +25,7 @@ collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_52uug")
 ExplosionEffect = ExtResource("2_03v0x")
+intensity_curve = ExtResource("3_alofp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

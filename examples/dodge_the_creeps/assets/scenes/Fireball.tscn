@@ -3,14 +3,10 @@
 [ext_resource type="Script" path="res://assets/scripts/Fireball.gd" id="1_g27v3"]
 [ext_resource type="Texture2D" uid="uid://ujab88aefoss" path="res://assets/sprites/projectiles/fireball_white_bottom.png" id="2_awhom"]
 [ext_resource type="PackedScene" uid="uid://ba8s1st1lqc5e" path="res://assets/scenes/Explosion.tscn" id="2_c058i"]
+[ext_resource type="Curve" uid="uid://0jrp0f2i3810" path="res://assets/curves/Fireball_Intensity.tres" id="3_0rcyg"]
 [ext_resource type="Texture2D" uid="uid://cda4ju411if4h" path="res://assets/sprites/projectiles/fireball_white_top.png" id="3_hlxu0"]
 [ext_resource type="AudioStream" uid="uid://bwrorlrgppgry" path="res://assets/sound/Fireball1.mp3" id="4_r4vrk"]
 [ext_resource type="Material" uid="uid://b6ukcccstmrxf" path="res://assets/materials/FireballTrail.tres" id="5_aticd"]
-
-[sub_resource type="Curve" id="Curve_boy6f"]
-min_value = -1.0
-_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.5, -0.05), 0.0, 0.0, 0, 0, Vector2(1, 0.05), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdiw0"]
 radius = 23.0
@@ -26,7 +22,7 @@ fill_to = Vector2(0, 0)
 [node name="Fireball" type="Area2D" groups=["Projectile"]]
 script = ExtResource("1_g27v3")
 ExplosionEffect = ExtResource("2_c058i")
-intensity_curve = SubResource("Curve_boy6f")
+intensity_curve = ExtResource("3_0rcyg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pdiw0")

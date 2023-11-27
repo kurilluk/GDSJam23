@@ -3,7 +3,7 @@ class_name Fireball
 
 @export var ExplosionEffect: PackedScene
 @export var intensity_curve: Curve
-@export var intensity_curve_scale = 0.25
+@export var intensity_curve_scale = 2
 var random_curve_offset: int
 
 var speed: int
@@ -23,8 +23,8 @@ func _process(delta):
 	position = position + (direction * speed * delta)
 	# oscillating projectile intensity
 	var time = Time.get_ticks_msec()
-	var t = (((int(time/intensity_curve_scale) + random_curve_offset) % 1000) / 1000.0)
-	$FireballBottom.self_modulate *= 1 + intensity_curve.sample(t)
+	var t = (((int(time * intensity_curve_scale) + random_curve_offset) % 1000) / 1000.0)
+	$FireballBottom.self_modulate = $FireballBottom.self_modulate * (1.0 + intensity_curve.sample(t))
 	pass
 
 func fade_in(duration, callback: Callable):

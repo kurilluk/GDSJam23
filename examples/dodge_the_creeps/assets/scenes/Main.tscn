@@ -34,6 +34,7 @@ scale = Vector2(0.997917, 1.00648)
 texture = ExtResource("4_6sh37")
 
 [node name="Player" parent="." node_paths=PackedStringArray("Game_HUD") instance=ExtResource("3")]
+SPEED = 550
 Game_HUD = NodePath("../HUD")
 POTION_COOLDOWN = 0.5
 Fireball = ExtResource("5_h27ax")
@@ -101,13 +102,8 @@ potion_effects_modification = {
 }
 
 [node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
-<<<<<<< Updated upstream
 background_color = Color(0.682353, 0.568627, 0.788235, 1)
 enemy_main_color = Color(0.596078, 0.639216, 0.294118, 1)
-=======
-background_color = Color(0.72549, 0.623529, 0.819608, 1)
-enemy_main_color = Color(0.745098, 0.870588, 0.286275, 1)
->>>>>>> Stashed changes
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(-1, 0),

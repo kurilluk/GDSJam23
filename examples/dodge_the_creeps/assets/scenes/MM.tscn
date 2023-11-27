@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://iiytwjbeav5h"]
+[gd_scene load_steps=5 format=3 uid="uid://cqjb80ij0vngd"]
 
 [ext_resource type="Texture2D" uid="uid://lr4ehat4x43v" path="res://art/background_biger.png" id="1_3q6wy"]
 [ext_resource type="FontFile" uid="uid://c00kskhe1j527" path="res://fonts/Inika-Bold.ttf" id="2_to612"]
@@ -89,4 +89,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, 1)

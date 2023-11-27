@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://rkdnhqgf2hpj"]
+[gd_scene load_steps=10 format=3 uid="uid://rkdnhqgf2hpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/EnemyProjectile.gd" id="1_52uug"]
 [ext_resource type="PackedScene" uid="uid://ba8s1st1lqc5e" path="res://assets/scenes/Explosion.tscn" id="2_03v0x"]
+[ext_resource type="Material" uid="uid://b6ukcccstmrxf" path="res://assets/materials/FireballTrail.tres" id="5_pklb8"]
 [ext_resource type="Texture2D" uid="uid://ujab88aefoss" path="res://assets/sprites/projectiles/fireball_white_bottom.png" id="8_fl6st"]
 [ext_resource type="Texture2D" uid="uid://cda4ju411if4h" path="res://assets/sprites/projectiles/fireball_white_top.png" id="9_u15j2"]
 [ext_resource type="AudioStream" uid="uid://dfgfr12prj7tl" path="res://assets/sound/Fireball2.mp3" id="10_u304x"]
@@ -9,35 +10,6 @@
 [sub_resource type="CapsuleShape2D" id="2"]
 radius = 45.0
 height = 90.0
-
-[sub_resource type="Gradient" id="Gradient_a2qca"]
-colors = PackedColorArray(0.525101, 0.525101, 0.525101, 0.701961, 0.347817, 0.347817, 0.347817, 0.713726)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tlm1j"]
-gradient = SubResource("Gradient_a2qca")
-
-[sub_resource type="Gradient" id="Gradient_k2x5t"]
-colors = PackedColorArray(0.733005, 0.733005, 0.733005, 0.67451, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_scgft"]
-gradient = SubResource("Gradient_k2x5t")
-
-[sub_resource type="Curve" id="Curve_0t07f"]
-_data = [Vector2(0, 0.536842), 0.0, 0.0, 0, 0, Vector2(0.46988, 0.178947), -0.582456, -0.582456, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="6"]
-curve = SubResource("Curve_0t07f")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xa45d"]
-lifetime_randomness = 0.05
-direction = Vector3(0, 1, 0)
-gravity = Vector3(0, 0, 0)
-scale_min = 0.8
-scale_max = 1.2
-scale_curve = SubResource("6")
-color_ramp = SubResource("GradientTexture1D_scgft")
-color_initial_ramp = SubResource("GradientTexture1D_tlm1j")
 
 [sub_resource type="Gradient" id="Gradient_gesbe"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -72,9 +44,9 @@ texture = ExtResource("9_u15j2")
 [node name="Trail" type="GPUParticles2D" parent="FireballBottom"]
 z_index = -1
 amount = 20
-process_material = SubResource("ParticleProcessMaterial_xa45d")
+process_material = ExtResource("5_pklb8")
 texture = SubResource("GradientTexture2D_854io")
-lifetime = 0.6
+lifetime = 1.25
 speed_scale = 2.0
 randomness = 0.2
 fract_delta = false

@@ -68,8 +68,8 @@ func update_bar(old_value, new_value, type):
 	
 	if tweener != null and tweener.is_running():
 		tweener.stop()
-		bar.value = old_value
-		underlying_bar.value = old_value
+		#bar.value = old_value
+		#underlying_bar.value = old_value
 	tweener = create_tween()
 	
 	if new_value > old_value: #healing

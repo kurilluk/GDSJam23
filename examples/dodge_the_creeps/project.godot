@@ -16,6 +16,10 @@ config/tags=PackedStringArray("2d", "demo", "official")
 run/main_scene="res://assets/scenes/Main.tscn"
 config/features=PackedStringArray("4.1")
 
+[autoload]
+
+MaterialsPreload="*res://assets/scripts/MaterialsPreload.gd"
+
 [debug]
 
 gdscript/warnings/redundant_await=false

@@ -62,6 +62,7 @@ stream = ExtResource("8_3ml3g")
 [node name="Layer" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(1, 1, 1, 1)
 enemy_main_color = Color(0.305882, 0.568627, 0.796078, 1)
+player_fireball_color = Color(0.811765, 0.482353, 0.0392157, 1)
 potion_effects_modification = {
 "Potion_1": 0,
 "Potion_2": 1,
@@ -72,6 +73,7 @@ potion_effects_modification = {
 [node name="Layer_swap_x" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.529412, 0.658824, 0.607843, 1)
 enemy_main_color = Color(0.741176, 0, 0.870588, 1)
+player_fireball_color = Color(0.415686, 0.686275, 0.309804, 1)
 input_modification = {
 "Down": Vector2(0, 1),
 "Left": Vector2(1, 0),
@@ -79,15 +81,16 @@ input_modification = {
 "Up": Vector2(0, -1)
 }
 potion_effects_modification = {
-"Potion_1": 2,
-"Potion_2": 3,
-"Potion_3": 1,
-"Potion_4": 0
+"Potion_1": 0,
+"Potion_2": 1,
+"Potion_3": 3,
+"Potion_4": 2
 }
 
 [node name="Layer_swap_xy" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.701961, 0.6, 0.560784, 1)
 enemy_main_color = Color(0.254902, 0.607843, 0.403922, 1)
+player_fireball_color = Color(0.729412, 0.384314, 0.882353, 1)
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(1, 0),
@@ -95,15 +98,16 @@ input_modification = {
 "Up": Vector2(0, 1)
 }
 potion_effects_modification = {
-"Potion_1": 3,
-"Potion_2": 0,
-"Potion_3": 2,
-"Potion_4": 1
+"Potion_1": 0,
+"Potion_2": 1,
+"Potion_3": 3,
+"Potion_4": 2
 }
 
 [node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.682353, 0.568627, 0.788235, 1)
 enemy_main_color = Color(0.596078, 0.639216, 0.294118, 1)
+player_fireball_color = Color(0.380392, 0.505882, 0.894118, 1)
 input_modification = {
 "Down": Vector2(0, -1),
 "Left": Vector2(-1, 0),
@@ -111,10 +115,10 @@ input_modification = {
 "Up": Vector2(0, 1)
 }
 potion_effects_modification = {
-"Potion_1": 1,
-"Potion_2": 3,
-"Potion_3": 2,
-"Potion_4": 0
+"Potion_1": 0,
+"Potion_2": 1,
+"Potion_3": 3,
+"Potion_4": 2
 }
 
 [node name="Timers" type="Node2D" parent="."]
@@ -127,9 +131,6 @@ wait_time = 0.4
 [node name="StartTimer" type="Timer" parent="Timers"]
 wait_time = 2.0
 one_shot = true
-
-[node name="LayerSwitchTimer" type="Timer" parent="Timers"]
-wait_time = 10.0
 
 [node name="CastMagickTimer" type="Timer" parent="Timers"]
 
@@ -144,7 +145,6 @@ script = ExtResource("8_3uva2")
 [connection signal="timeout" from="Timers/MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="Timers/ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]
-[connection signal="timeout" from="Timers/LayerSwitchTimer" to="." method="_on_layer_switch_timer_timeout"]
 [connection signal="timeout" from="Timers/CastMagickTimer" to="Player" method="_on_cast_magick_timer_timeout"]
 
 [editable path="Player"]

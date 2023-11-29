@@ -18,6 +18,7 @@ var player_dead = true
 var screen_size # Size of the game window.
 
 var velocity
+var player_fireball_color: Color
 var projectile_append: Callable
 var projectile_erase: Callable
 signal on_death
@@ -52,7 +53,10 @@ func _process(delta):
 		return
 	handle_movement(delta)
 	handle_potion_inputs()
-
+	
+func set_fireball_color(new_color):
+	self.player_fireball_color = new_color
+	
 func handle_movement(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
 	for action in player_inputs:
@@ -111,7 +115,7 @@ func cast_magicks():
 		fireball.set_rot(rot)
 		fireball.set_pos(position + (dir * 10))
 		fireball.set_dir(dir)
-		fireball.set_color(Color.DARK_ORANGE)
+		fireball.set_color(player_fireball_color)
 		fireball.set_speed(FIREBALL_SPEED)
 		fireball.set_ignore_target("Player")
 		fireball.on_death_callback = projectile_erase

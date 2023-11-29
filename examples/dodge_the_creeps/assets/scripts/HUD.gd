@@ -17,6 +17,13 @@ signal start_game
 var health_tween: Tween
 var mana_tween: Tween
 
+@export var potion_name_colors = {
+	"Potion_1" : Color.DARK_RED,
+	"Potion_2" : Color.SEA_GREEN,
+	"Potion_3" : Color.YELLOW,
+	"Potion_4" : Color.BLUE
+}
+
 func _ready():
 	hud_bars_hidden()
 	

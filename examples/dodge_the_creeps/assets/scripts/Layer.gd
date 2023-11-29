@@ -4,6 +4,8 @@ class_name Layer
 @export var background_color: Color
 @export var enemy_main_color: Color
 @export var enemy_off_color: Color
+@export var player_fireball_color: Color
+@export var player_accent_color: Color
 
 @export var input_modification = {
 	"Left": Vector2.LEFT,
@@ -23,6 +25,15 @@ class_name Layer
 	"Potion_3": 2,
 	"Potion_4": 3
 }
+
+func shuffle_potion_effects() -> Array:
+	var vals_permutation = potion_effects_modification.values()
+	vals_permutation.shuffle()	
+	var i = 0
+	for key in potion_effects_modification.keys():
+		potion_effects_modification[key] = vals_permutation[i]
+		i += 1
+	return potion_effects_modification.values()
 
 func get_input_modification():
 	return input_modification

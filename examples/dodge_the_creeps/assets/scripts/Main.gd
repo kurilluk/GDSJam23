@@ -11,15 +11,16 @@ var enemy_projectiles: Array[EnemyProjectile]
 var player_projectiles: Array[Fireball]
 var level = 0
 var pitch = 1
+var projectile_multiplier = 1.5
 
 func _ready() -> void:
+	randomize_potion_effects()
 	pass
 
 func game_over():
 	$Timers/ScoreTimer.stop()
 	$Timers/MobTimer.stop()
 	$Timers/CastMagickTimer.stop()
-	$Timers/LayerSwitchTimer.stop()
 	$HUD.show_game_over()
 	$HUD.hide_hud_bars()
 	$Music.stop()
@@ -41,6 +42,21 @@ func new_game():
 	pitch = 1
 	set_new_layer(layers[0])
 
+func randomize_potion_effects():
+	#reshuffle all layers' potion modificators apart from the starting "normal" layer
+	for i in range(1, layers.size()):
+		var layer = layers[i]
+		var permutation = layer.shuffle_potion_effects()
+		#check for any duplicate modificators on previous all layers and reshuffle
+		while not potion_permutation_unique(i, permutation):
+			permutation = layer.shuffle_potion_effects()
+
+func potion_permutation_unique(i, permutation) -> bool:
+	for j in range(0, i):
+		if permutation == layers[j].potion_effects_modification.values():
+			return false
+	return true
+
 func append_projectile(projectile):
 	player_projectiles.append(projectile)
 	
@@ -54,15 +70,21 @@ func set_new_layer(layer: Layer):
 	$Music.pitch_scale = pitch
 	$Music.play()
 	pitch += 0.25
+	projectile_multiplier += 0.25
 	if pitch >= 3.0:
 		pitch = 3.0
 	
 	background.modulate = layer.background_color
 	$Player.set_player_inputs(layer.get_input_modification())
 	$Player.set_potion_effects(layer.get_potion_modifications())
+	$Player.set_fireball_color(layer.player_fireball_color)
 	
 	set_enemy_colors(layer.enemy_main_color)
 	
+func set_player_fireball_colors(color):
+	for fireball in player_projectiles:
+		fireball.set_color(color)
+
 func set_enemy_colors(color):
 	var remove_last = []
 	for i in enemy_projectiles.size():
@@ -76,9 +98,10 @@ func set_enemy_colors(color):
 		enemy_projectiles.remove_at(index)
 
 func _on_MobTimer_timeout():
+	var enmy_projectiles_to_spawn = randi_range(int(pitch), int(projectile_multiplier))
 	for i in range(0 , int(pitch)):
 	# Create a new instance of the Mob scene.
-		var e_proj = enemy_proj_scene.instantiate()
+		var enm_projectile = enemy_proj_scene.instantiate()
 
 	# Choose a random location on Path2D.
 		var e_projectile_spawn_location = get_node(^"MobPath/MobSpawnLocation")
@@ -86,24 +109,20 @@ func _on_MobTimer_timeout():
 
 	# Set the mob's direction perpendicular to the path direction.
 		var direction = e_projectile_spawn_location.position.angle_to_point($Player.position)
-		#e_projectile_spawn_location.rotation
+		enm_projectile.position = e_projectile_spawn_location.position
 
-	# Set the mob's position to a random location.
-		e_proj.position = e_projectile_spawn_location.position
-
-	# Choose the velocity for the mob.
 		var velocity = Vector2(randf_range(550.0, 800.0), 0.0)
 		
-	# Add some randomness to the direction.
+		# Add some randomness to the direction.
 		direction += randf_range(-PI / 16.0, PI / 16.0)
-		e_proj.linear_velocity = velocity.rotated(direction)
+		enm_projectile.linear_velocity = velocity.rotated(direction)
 		
-		e_proj.set_new_rotation(Vector2.UP.angle_to(e_proj.linear_velocity.normalized()))	
+		enm_projectile.set_new_rotation(Vector2.UP.angle_to(enm_projectile.linear_velocity.normalized()))	
 	
-		e_proj.set_color(current_layer.enemy_main_color)
-		enemy_projectiles.append(e_proj)
-	# Spawn the mob by adding it to the Main scene.
-		add_child(e_proj)
+		enm_projectile.set_color(current_layer.enemy_main_color)
+		enemy_projectiles.append(enm_projectile)
+
+		add_child(enm_projectile)
 
 func _on_ScoreTimer_timeout():
 	score += 1
@@ -113,11 +132,6 @@ func _on_StartTimer_timeout():
 	$Timers/MobTimer.start()
 	$Timers/ScoreTimer.start()
 	$Timers/CastMagickTimer.start()
-	$Timers/LayerSwitchTimer.start()
-	
-func _on_layer_switch_timer_timeout():	
-#	$HUD.fade_layer_switch(Callable(self, "set_new_layer_callback"))
-	pass
 	
 func set_new_layer_callback():
 	var new_layer = get_rand_layer()

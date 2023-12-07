@@ -63,12 +63,6 @@ stream = ExtResource("8_3ml3g")
 background_color = Color(1, 1, 1, 1)
 enemy_main_color = Color(0.305882, 0.568627, 0.796078, 1)
 player_fireball_color = Color(0.811765, 0.482353, 0.0392157, 1)
-potion_effects_modification = {
-"Potion_1": 0,
-"Potion_2": 1,
-"Potion_3": 3,
-"Potion_4": 2
-}
 
 [node name="Layer_swap_x" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.529412, 0.658824, 0.607843, 1)
@@ -79,12 +73,6 @@ input_modification = {
 "Left": Vector2(1, 0),
 "Right": Vector2(-1, 0),
 "Up": Vector2(0, -1)
-}
-potion_effects_modification = {
-"Potion_1": 0,
-"Potion_2": 1,
-"Potion_3": 3,
-"Potion_4": 2
 }
 
 [node name="Layer_swap_xy" parent="Layers" instance=ExtResource("7_23b4r")]
@@ -97,12 +85,6 @@ input_modification = {
 "Right": Vector2(-1, 0),
 "Up": Vector2(0, 1)
 }
-potion_effects_modification = {
-"Potion_1": 0,
-"Potion_2": 1,
-"Potion_3": 3,
-"Potion_4": 2
-}
 
 [node name="Layer_swap_y" parent="Layers" instance=ExtResource("7_23b4r")]
 background_color = Color(0.682353, 0.568627, 0.788235, 1)
@@ -113,12 +95,6 @@ input_modification = {
 "Left": Vector2(-1, 0),
 "Right": Vector2(1, 0),
 "Up": Vector2(0, 1)
-}
-potion_effects_modification = {
-"Potion_1": 0,
-"Potion_2": 1,
-"Potion_3": 3,
-"Potion_4": 2
 }
 
 [node name="Timers" type="Node2D" parent="."]

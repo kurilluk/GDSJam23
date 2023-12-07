@@ -81,6 +81,8 @@ func set_new_layer(layer: Layer):
 	
 	set_enemy_colors(layer.enemy_main_color)
 	
+	$HUD.change_hud_bar_colors(layer.get_layer_heal_potion(), layer.get_layer_mana_potion())
+	
 func set_player_fireball_colors(color):
 	for fireball in player_projectiles:
 		fireball.set_color(color)

@@ -22,8 +22,8 @@ class_name Layer
 @export var potion_effects_modification = {
 	"Potion_1": 0,
 	"Potion_2": 1,
-	"Potion_3": 2,
-	"Potion_4": 3
+	"Potion_3": 3,
+	"Potion_4": 2
 }
 
 func shuffle_potion_effects() -> Array:
@@ -40,6 +40,17 @@ func get_input_modification():
 	
 func get_potion_modifications():
 	return potion_effects_modification
+
+func get_layer_heal_potion():
+	return get_layer_potion(0)
+	
+func get_layer_mana_potion():
+	return get_layer_potion(2)
+	
+func get_layer_potion(effect_id):
+	var vals = potion_effects_modification.values()
+	var id = vals.find(effect_id, 0)
+	return potion_effects_modification.keys()[id]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

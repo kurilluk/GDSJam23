@@ -19,9 +19,9 @@ var mana_tween: Tween
 
 @export var potion_name_colors = {
 	"Potion_1" : Color.DARK_RED,
-	"Potion_2" : Color.SEA_GREEN,
-	"Potion_3" : Color.YELLOW,
-	"Potion_4" : Color.BLUE
+	"Potion_2" : Color.WEB_GREEN,
+	"Potion_3" : Color.ORANGE,
+	"Potion_4" : Color.MEDIUM_BLUE
 }
 
 func _ready():
@@ -31,6 +31,15 @@ func show_message(text):
 	$MessageLabel.text = text
 	$MessageLabel.show()
 	$MessageTimer.start()
+
+func change_hud_bar_colors(heal_potion, mana_potion):
+	HealthBar.tint_progress = potion_name_colors[heal_potion]
+	UnderlyingHealthBar.tint_progress = potion_name_colors[heal_potion]
+	UnderlyingHealthBar.tint_progress.a = 0.75
+	
+	ManaBar.tint_progress = potion_name_colors[mana_potion]
+	UnderlyingManaBar.tint_progress = potion_name_colors[mana_potion]
+	UnderlyingManaBar.tint_progress.a = 0.75
 
 func show_hud_bars():
 	var bars = [HealthBar, UnderlyingHealthBar, ManaBar, UnderlyingManaBar]  #, HudFrame, PotionsScene

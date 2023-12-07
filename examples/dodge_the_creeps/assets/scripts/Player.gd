@@ -175,6 +175,9 @@ func check_player_health():
 
 func _on_Player_body_entered(_body):
 #	hide() # Player disappears after being hit.
+	if player_dead:
+		return
+		
 	if _body.is_in_group("Projectile") and not _body.destroyed:
 		player_hurt_effect()
 		_body.destroy_self()

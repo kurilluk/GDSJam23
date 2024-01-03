@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://4vwrqjegqwpj"]
+[gd_scene load_steps=29 format=3 uid="uid://4vwrqjegqwpj"]
 
 [ext_resource type="Script" path="res://assets/scripts/Player.gd" id="1_xm0s2"]
 [ext_resource type="Texture2D" uid="uid://ftkxr8r4qghp" path="res://art/playerGrey_walk1.png" id="2_ngcnf"]
@@ -13,6 +13,13 @@
 [ext_resource type="AudioStream" uid="uid://drj07yj5x5rw3" path="res://assets/sound/Mana_potion.mp3" id="12_j8lnq"]
 [ext_resource type="AudioStream" uid="uid://5ia8eybkn3ya" path="res://assets/sound/Healingdrain_potion.mp3" id="12_p4aha"]
 [ext_resource type="AudioStream" uid="uid://d324dl36pt0fs" path="res://assets/sound/Manadrain_potion.mp3" id="13_1pnjb"]
+[ext_resource type="Texture2D" uid="uid://dklu8xthhb45d" path="res://art/G_mage/G_mage_body.png" id="14_kmeo8"]
+[ext_resource type="Script" path="res://assets/scripts/PlayerSpriteManager.gd" id="15_mhhux"]
+[ext_resource type="Texture2D" uid="uid://bks00pf1buy7m" path="res://art/G_mage/G_mage_head.png" id="16_a02cm"]
+[ext_resource type="Texture2D" uid="uid://b0c004i2jqqjv" path="res://art/G_mage/G_mage_heat.png" id="17_gwluf"]
+[ext_resource type="Texture2D" uid="uid://dxomrb045kmfw" path="res://art/G_mage/G_mage_orb_stick.png" id="18_wd8mt"]
+[ext_resource type="Texture2D" uid="uid://dnli0vn0tgcco" path="res://art/G_mage/G_mage_orb.png" id="19_847mc"]
+[ext_resource type="Texture2D" uid="uid://w5pystygmvdr" path="res://art/G_mage/G_mage_book.png" id="20_b3hym"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -63,9 +70,10 @@ color_ramp = SubResource("GradientTexture1D_rbea0")
 
 [sub_resource type="ImageTexture" id="ImageTexture_0wciw"]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("player_sprite_mngr")]
 z_index = 10
 script = ExtResource("1_xm0s2")
+player_sprite_mngr = NodePath("PlayerSprite")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -85,6 +93,7 @@ texture = SubResource("ImageTexture_0wciw")
 speed_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 texture = ExtResource("7_jf8c2")
 
@@ -117,5 +126,30 @@ volume_db = 8.0
 [node name="S_ManaPotionDrain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_j8lnq")
 volume_db = 8.0
+
+[node name="PlayerSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("parts", "magic_fx_parts", "move_dragging_parts")]
+position = Vector2(0, -4)
+texture = ExtResource("14_kmeo8")
+script = ExtResource("15_mhhux")
+parts = [NodePath("."), NodePath("Head"), NodePath("Head/Hat"), NodePath("Wand"), NodePath("Wand/WandOrb"), NodePath("Tome")]
+magic_fx_parts = [NodePath("Wand/WandOrb")]
+move_dragging_parts = [NodePath("Wand"), NodePath("Tome")]
+
+[node name="Head" type="Sprite2D" parent="PlayerSprite"]
+position = Vector2(1, 0)
+texture = ExtResource("16_a02cm")
+
+[node name="Hat" type="Sprite2D" parent="PlayerSprite/Head"]
+position = Vector2(0, -2)
+texture = ExtResource("17_gwluf")
+
+[node name="Wand" type="Sprite2D" parent="PlayerSprite"]
+texture = ExtResource("18_wd8mt")
+
+[node name="WandOrb" type="Sprite2D" parent="PlayerSprite/Wand"]
+texture = ExtResource("19_847mc")
+
+[node name="Tome" type="Sprite2D" parent="PlayerSprite"]
+texture = ExtResource("20_b3hym")
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

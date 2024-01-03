@@ -12,11 +12,14 @@ signal hit
 
 @export var Fireball: PackedScene
 
+@export var player_sprite_mngr: PlayerSpriteManager = null
+
 var health
 var mana
 var player_dead = true
 var screen_size # Size of the game window.
 
+var tmp_no_movement = true
 var velocity
 var player_fireball_color: Color
 var projectile_append: Callable
@@ -56,6 +59,24 @@ func _process(delta):
 	
 func set_fireball_color(new_color):
 	self.player_fireball_color = new_color
+	set_player_sprite_fx_color(new_color)
+	
+func set_player_sprite_fx_color(new_color):
+	if player_sprite_mngr != null:
+		player_sprite_mngr.set_magic_fx_color(new_color)
+# right = false ; left = true
+func set_player_sprite_facing(side: bool):
+	if player_sprite_mngr != null:
+		var facing = null
+		if side:
+			facing = PlayerSpriteManager.Facing.LEFT
+		else:
+			facing = PlayerSpriteManager.Facing.RIGHT
+		player_sprite_mngr.set_facing(facing)
+		
+func player_sprite_play_magic_fx():
+	if player_sprite_mngr != null:
+		player_sprite_mngr.magic_casting_fx()
 	
 func handle_movement(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
@@ -64,18 +85,26 @@ func handle_movement(delta):
 			velocity += player_inputs[action]
 
 	if velocity.length() > 0:
+		if tmp_no_movement:
+			player_sprite_mngr.movement_started()
+		tmp_no_movement = false
 		velocity = velocity.normalized() * SPEED
 		$AnimatedSprite2D.play()
 	else:
+		if not tmp_no_movement:
+			player_sprite_mngr.movement_ended()
+		tmp_no_movement = true
 		$AnimatedSprite2D.stop()
 
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-	if velocity.x > 0:
+	if velocity.x > 0: # moving right
 		$Sprite2D.flip_h = false
-	elif velocity.x < 0:
+		set_player_sprite_facing(false)
+	elif velocity.x < 0: #moving left
 		$Sprite2D.flip_h = true
+		set_player_sprite_facing(true)
 	#if velocity.x != 0:
 	#	$AnimatedSprite2D.animation = &"right"
 	#	$AnimatedSprite2D.flip_v = false
@@ -99,8 +128,9 @@ func player_hurt_effect():
 	tweener.tween_property($Sprite2D, "modulate", Color.DARK_RED, 0.15)
 	tweener.tween_property($Sprite2D, "modulate", Color.WHITE, 0.15)
 
-func cast_magicks():	
+func cast_magicks():
 	$Fire_1.play()
+	player_sprite_play_magic_fx()
 	
 	var player_dir = velocity.normalized() if velocity.length() != 0 else Vector2.UP
 	
